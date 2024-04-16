@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.text.Segment;
 
-public class PersistenceVehicle{
+public class PersistenceVehicle {
 
     
     private List<Color> colores = new ArrayList<>();

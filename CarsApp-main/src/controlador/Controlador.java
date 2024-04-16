@@ -11,6 +11,7 @@ import vista.VistaPrincipal;
 public class Controlador implements ActionListener{
     private IPrincipal vista = new VistaPrincipal();
     private PersistenceVehicle persistence = new PersistenceVehicle();;
+    
     public void ejecutar(){
         vista.setControlador(this);
         vista.cargarMarcas(defaultmarcas());

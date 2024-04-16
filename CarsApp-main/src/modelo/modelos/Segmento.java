@@ -7,8 +7,6 @@ public class Segmento {
     private Flete flete;
     private Patentamiento patentado;
 
-    
-
     public Segmento(String nombre) {
         this.nombre = nombre;
     }

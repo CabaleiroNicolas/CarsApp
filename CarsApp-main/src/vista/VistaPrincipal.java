@@ -4,6 +4,10 @@
  */
 package vista;
 
+import java.awt.Event;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 /**
@@ -21,23 +25,57 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
 
     public void ejecutar(){
         this.setVisible(true);
+        jLabel2.setVisible(false);
+        jComboBox2.setVisible(false);
+        jLabel3.setVisible(false);
+        jComboBox3.setVisible(false);
+        jLabel4.setVisible(false);
+        jComboBox4.setVisible(false);
     }
     
     public void setControlador(controlador.Controlador control){
-        jButton3.addActionListener(control);
-        jButton3.setActionCommand(CARGAR_MODELOS);
-        jButton4.addActionListener(control);
-        jButton4.setActionCommand(CARGAR_VERSIONES);
-        jButton5.addActionListener(control);
-        jButton5.setActionCommand(CARGAR_COLORES);
-        
+        jComboBox1.addActionListener(control);
+        jComboBox1.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                ActionEvent actionEvent = new ActionEvent(jComboBox1, ActionEvent.ACTION_PERFORMED, CARGAR_MODELOS);
+                control.actionPerformed(actionEvent);
+                jLabel2.setVisible(true);
+                jComboBox2.setVisible(true);
+            }
+        });
+        jComboBox2.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                ActionEvent actionEvent = new ActionEvent(jComboBox1, ActionEvent.ACTION_PERFORMED, CARGAR_VERSIONES);
+                control.actionPerformed(actionEvent);
+                jLabel3.setVisible(true);
+                jComboBox3.setVisible(true);
+            }
+        });
+        jComboBox3.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                ActionEvent actionEvent = new ActionEvent(jComboBox1, ActionEvent.ACTION_PERFORMED, CARGAR_COLORES);
+                control.actionPerformed(actionEvent);
+                jLabel4.setVisible(true);
+                jComboBox4.setVisible(true);
+            }
+        });
+
     }
     
     public void cargarMarcas(List marcas){
         jComboBox1.removeAllItems();
+        // Desactivamos temporalmente los ItemListeners
+        ItemListener[] listeners = jComboBox1.getItemListeners();
+        for (ItemListener listener : listeners) {
+            jComboBox1.removeItemListener(listener);
+        }
         for(int i=0; i<marcas.size();i++){
             String item = (String) marcas.get(i);
             jComboBox1.addItem(item);
+        }
+        // Reactivamos los ItemListeners
+        for (ItemListener listener : listeners) {
+            jComboBox1.addItemListener(listener);
         }
     }
     
@@ -56,17 +94,38 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     
     public void cargarModelos(List marcas){
         jComboBox2.removeAllItems();
+        //Obtenemos todos los ItemListener 
+        ItemListener[] listeners = jComboBox2.getItemListeners();
+        //Desactivamos uno por uno para prevenir la deteccion en la carga
+        for (ItemListener listener : listeners) {
+            jComboBox2.removeItemListener(listener);
+        }
+        //Cargamos los items
         for(int i=0; i<marcas.size();i++){
             String item = (String) marcas.get(i);
             jComboBox2.addItem(item);
+        }
+        // Reactivamos los ItemListeners
+        for (ItemListener listener : listeners) {
+            jComboBox2.addItemListener(listener);
         }
     }
     
     public void cargarVersiones(List marcas){
         jComboBox3.removeAllItems();
+        //Obtenemos todos los ItemListener 
+        ItemListener[] listeners = jComboBox3.getItemListeners();
+        //Desactivamos uno por uno para prevenir la deteccion en la carga
+        for (ItemListener listener : listeners) {
+            jComboBox3.removeItemListener(listener);
+        }
         for(int i=0; i<marcas.size();i++){
             String item = (String) marcas.get(i);
             jComboBox3.addItem(item);
+        }
+        // Reactivamos los ItemListeners
+        for (ItemListener listener : listeners) {
+            jComboBox3.addItemListener(listener);
         }
     }
     
@@ -91,9 +150,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
         jLabel4 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -140,17 +196,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jButton3.setText("Seleccionar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Seleccionar");
-
-        jButton5.setText("Seleccionar");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Información del vehículo:");
@@ -220,22 +265,13 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton5))
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(114, 114, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -258,7 +294,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                                             .addComponent(jLabel9)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel18)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(layout.createSequentialGroup()
@@ -341,22 +376,16 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                 .addGap(48, 48, 48)
                 .addComponent(jLabel1)
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
-                .addGap(22, 22, 22)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,10 +394,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -426,9 +451,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.text.Segment;
+import modelo.modelos.Flete;
+import modelo.modelos.Patentamiento;
 
 public class PersistenceVehicle {
 
@@ -48,6 +50,10 @@ public class PersistenceVehicle {
     private Segmento segmentoA = new Segmento("Segmento A");
     private Segmento segmentoB = new Segmento("Segmento B");
     private Segmento segmentoC = new Segmento("Segmento C");
+    //Flete
+    private Flete fleteB = new Flete();
+    //Patentamiento
+    private Patentamiento patentamientoB = new Patentamiento();
 
     
     public PersistenceVehicle() {
@@ -65,11 +71,18 @@ public class PersistenceVehicle {
         ex.setSegmento(segmentoB);
         exs.setColores(colores);
         exs.setSegmento(segmentoB);
+        exs.setPrecio(16000.00);
+        fleteB.setCosto(250.00);
+        patentamientoB.setCosto(exs.getPrecio());
+        segmentoB.setFlete(fleteB);
+        segmentoB.setPatentado(patentamientoB);
+        exs.setSegmento(segmentoB);
+        
         fit.getVersiones().add(lx);
         fit.getVersiones().add(ex);
         fit.getVersiones().add(exs);
-        ex.setSegmento(segmentoC);
-        exs.setSegmento(segmentoC);
+        //ex.setSegmento(segmentoC);
+        //exs.setSegmento(segmentoC);
         cr_v.getVersiones().add(ex);
         cr_v.getVersiones().add(exs);
 
@@ -126,6 +139,17 @@ public class PersistenceVehicle {
         return mod.getVersiones().stream().filter(m -> m.getNombre().equals(version))
                     .findFirst()
                     .orElse(null);
+    }
+    
+    public Color buscarColor(String marca, String modelo, String version, String color){
+        Version ver = buscarVersion(marca, modelo, version);
+        return ver.getColores().stream().filter(m -> m.getNombre().equals(color))
+                    .findFirst()
+                    .orElse(null);
+    }
+    
+    public boolean isDisponible(Color color){
+        return (color.getEstado().equals(Estados.DISPONIBLE)) ? true : false;
     }
 
     public List<Color> getColores() {

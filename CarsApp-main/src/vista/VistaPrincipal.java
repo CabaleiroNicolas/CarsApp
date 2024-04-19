@@ -59,6 +59,12 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                 jComboBox4.setVisible(true);
             }
         });
+        jComboBox4.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                ActionEvent actionEvent = new ActionEvent(jComboBox1, ActionEvent.ACTION_PERFORMED, CARGAR_DISPONIBILIDAD);
+                control.actionPerformed(actionEvent);
+            }
+        });
 
     }
     
@@ -131,10 +137,33 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     
     public void cargarColores(List colores){
         jComboBox4.removeAllItems();
+        ItemListener[] listeners = jComboBox4.getItemListeners();
+        for (ItemListener listener : listeners) {
+            jComboBox4.removeItemListener(listener);
+        }
         for(int i=0; i<colores.size();i++){
             String item = (String) colores.get(i);
             jComboBox4.addItem(item);
         }
+        for (ItemListener listener : listeners) {
+            jComboBox4.addItemListener(listener);
+        }
+    }
+    
+    public void setDisponibilidad(boolean flag){
+        if(flag){
+            jLabel6.setText("Disponibilidad: DISPONIBLE");
+            }else
+        { jLabel6.setText("Disponibilidad: NO DISPONIBLE");
+        }
+    }
+    
+    public void setPrecio(Double precio){
+        jLabel7.setText("Precio: $" + precio);
+    }
+    
+    public void setTotal(Double precio){
+        jLabel10.setText("Monto total: $" + precio);
     }
     
     @SuppressWarnings("unchecked")

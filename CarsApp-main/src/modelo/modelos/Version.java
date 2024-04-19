@@ -7,9 +7,16 @@ public class Version {
     
     private String nombre;
     private Segmento segmento;
+    private Double precio;
     private ArrayList<Color> colores;
 
-    
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
 
     public Version(String nombre) {
         this.nombre = nombre;

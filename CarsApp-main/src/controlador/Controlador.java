@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.persistencia.PersistenceVehicle;
+import modelo.modelos.Color;
+import modelo.modelos.Version;
 import vista.IPrincipal;
 import vista.VistaPrincipal;
 
@@ -26,6 +28,19 @@ public class Controlador implements ActionListener{
             vista.cargarVersiones(versionByModelo(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado()));
         }else if(event.getActionCommand().equals(vista.CARGAR_COLORES)){
             vista.cargarColores(coloresByVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada()));
+        }else if(event.getActionCommand().equals(vista.CARGAR_DISPONIBILIDAD)){
+            Color aux = persistence.buscarColor(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada(), vista.getColorSeleccionado());
+            boolean auxBool = persistence.isDisponible(aux);
+            vista.setDisponibilidad(auxBool);
+            if(auxBool){
+                Version auxVer = persistence.buscarVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada());
+                vista.setPrecio(auxVer.getPrecio());
+                if(auxVer.getSegmento()!= null){
+                    System.out.println(auxVer.getSegmento().getNombre());
+                }
+                double total = auxVer.getPrecio() + auxVer.getSegmento().getFlete().getCosto() + auxVer.getSegmento().getPatentado().getCosto();
+                vista.setTotal(total);
+            }
         }
     }
     
@@ -60,5 +75,6 @@ public class Controlador implements ActionListener{
         list.addAll(aux);
         return list;
     }
+    
     
 }

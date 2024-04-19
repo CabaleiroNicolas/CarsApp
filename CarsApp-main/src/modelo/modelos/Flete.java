@@ -4,6 +4,10 @@ public class Flete {
     private String lugar;
     private double costo;
 
+    public Flete() {
+    }
+    
+
     public Flete(String lugar, double costo) {
         this.lugar = lugar;
         this.costo = costo;

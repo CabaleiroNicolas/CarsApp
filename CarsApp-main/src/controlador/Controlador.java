@@ -22,22 +22,33 @@ public class Controlador implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent event) {
+        
         if(event.getActionCommand().equals(vista.CARGAR_MODELOS)){
             vista.cargarModelos(modelosByMarca(vista.getMarcaSeleccionada()));
-        }else if(event.getActionCommand().equals(vista.CARGAR_VERSIONES)){
+            
+        } else if(event.getActionCommand().equals(vista.CARGAR_VERSIONES)){
             vista.cargarVersiones(versionByModelo(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado()));
-        }else if(event.getActionCommand().equals(vista.CARGAR_COLORES)){
+            
+        } else if(event.getActionCommand().equals(vista.CARGAR_COLORES)){
             vista.cargarColores(coloresByVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada()));
-        }else if(event.getActionCommand().equals(vista.CARGAR_DISPONIBILIDAD)){
+            
+        } else if(event.getActionCommand().equals(vista.CARGAR_DISPONIBILIDAD)){
             Color aux = persistence.buscarColor(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada(), vista.getColorSeleccionado());
             boolean auxBool = persistence.isDisponible(aux);
             vista.setDisponibilidad(auxBool);
+            
             if(auxBool){
                 Version auxVer = persistence.buscarVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada());
                 vista.setPrecio(auxVer.getPrecio());
+                
+                String fecha = auxVer.getFechaEntrega().getDia() + "/" + auxVer.getFechaEntrega().getMes() + "/" + auxVer.getFechaEntrega().getAnio();
+                System.out.println(auxVer.getFechaEntrega().getDia());
+                vista.setFechaEntrega(fecha);
+                
                 if(auxVer.getSegmento()!= null){
                     System.out.println(auxVer.getSegmento().getNombre());
                 }
+                
                 double total = auxVer.getPrecio() + auxVer.getSegmento().getFlete().getCosto() + auxVer.getSegmento().getPatentado().getCosto();
                 vista.setTotal(total);
             }

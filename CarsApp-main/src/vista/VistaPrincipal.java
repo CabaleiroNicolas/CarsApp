@@ -26,42 +26,42 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     public void ejecutar(){
         this.setVisible(true);
         jLabel2.setVisible(false);
-        jComboBox2.setVisible(false);
+        cmbModelo.setVisible(false);
         jLabel3.setVisible(false);
-        jComboBox3.setVisible(false);
+        cmbVersion.setVisible(false);
         jLabel4.setVisible(false);
-        jComboBox4.setVisible(false);
+        cmbColor.setVisible(false);
     }
     
     public void setControlador(controlador.Controlador control){
-        jComboBox1.addActionListener(control);
-        jComboBox1.addItemListener(e -> {
+        cmbMarca.addActionListener(control);
+        cmbMarca.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                ActionEvent actionEvent = new ActionEvent(jComboBox1, ActionEvent.ACTION_PERFORMED, CARGAR_MODELOS);
+                ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_MODELOS);
                 control.actionPerformed(actionEvent);
                 jLabel2.setVisible(true);
-                jComboBox2.setVisible(true);
+                cmbModelo.setVisible(true);
             }
         });
-        jComboBox2.addItemListener(e -> {
+        cmbModelo.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                ActionEvent actionEvent = new ActionEvent(jComboBox1, ActionEvent.ACTION_PERFORMED, CARGAR_VERSIONES);
+                ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_VERSIONES);
                 control.actionPerformed(actionEvent);
                 jLabel3.setVisible(true);
-                jComboBox3.setVisible(true);
+                cmbVersion.setVisible(true);
             }
         });
-        jComboBox3.addItemListener(e -> {
+        cmbVersion.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                ActionEvent actionEvent = new ActionEvent(jComboBox1, ActionEvent.ACTION_PERFORMED, CARGAR_COLORES);
+                ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_COLORES);
                 control.actionPerformed(actionEvent);
                 jLabel4.setVisible(true);
-                jComboBox4.setVisible(true);
+                cmbColor.setVisible(true);
             }
         });
-        jComboBox4.addItemListener(e -> {
+        cmbColor.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                ActionEvent actionEvent = new ActionEvent(jComboBox1, ActionEvent.ACTION_PERFORMED, CARGAR_DISPONIBILIDAD);
+                ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_DISPONIBILIDAD);
                 control.actionPerformed(actionEvent);
             }
         });
@@ -69,84 +69,84 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     }
     
     public void cargarMarcas(List marcas){
-        jComboBox1.removeAllItems();
+        cmbMarca.removeAllItems();
         // Desactivamos temporalmente los ItemListeners
-        ItemListener[] listeners = jComboBox1.getItemListeners();
+        ItemListener[] listeners = cmbMarca.getItemListeners();
         for (ItemListener listener : listeners) {
-            jComboBox1.removeItemListener(listener);
+            cmbMarca.removeItemListener(listener);
         }
         for(int i=0; i<marcas.size();i++){
             String item = (String) marcas.get(i);
-            jComboBox1.addItem(item);
+            cmbMarca.addItem(item);
         }
         // Reactivamos los ItemListeners
         for (ItemListener listener : listeners) {
-            jComboBox1.addItemListener(listener);
+            cmbMarca.addItemListener(listener);
         }
     }
     
     public String getMarcaSeleccionada(){
-        return (String)jComboBox1.getSelectedItem();
+        return (String)cmbMarca.getSelectedItem();
     }
     public String getModeloSeleccionado(){
-        return (String)jComboBox2.getSelectedItem();
+        return (String)cmbModelo.getSelectedItem();
     }
     public String getVersionSeleccionada(){
-        return (String)jComboBox3.getSelectedItem();
+        return (String)cmbVersion.getSelectedItem();
     }
     public String getColorSeleccionado(){
-        return (String)jComboBox4.getSelectedItem();
+        return (String)cmbColor.getSelectedItem();
     }
     
     public void cargarModelos(List marcas){
-        jComboBox2.removeAllItems();
+        cmbModelo.removeAllItems();
         //Obtenemos todos los ItemListener 
-        ItemListener[] listeners = jComboBox2.getItemListeners();
+        ItemListener[] listeners = cmbModelo.getItemListeners();
         //Desactivamos uno por uno para prevenir la deteccion en la carga
         for (ItemListener listener : listeners) {
-            jComboBox2.removeItemListener(listener);
+            cmbModelo.removeItemListener(listener);
         }
         //Cargamos los items
         for(int i=0; i<marcas.size();i++){
             String item = (String) marcas.get(i);
-            jComboBox2.addItem(item);
+            cmbModelo.addItem(item);
         }
         // Reactivamos los ItemListeners
         for (ItemListener listener : listeners) {
-            jComboBox2.addItemListener(listener);
+            cmbModelo.addItemListener(listener);
         }
     }
     
     public void cargarVersiones(List marcas){
-        jComboBox3.removeAllItems();
+        cmbVersion.removeAllItems();
         //Obtenemos todos los ItemListener 
-        ItemListener[] listeners = jComboBox3.getItemListeners();
+        ItemListener[] listeners = cmbVersion.getItemListeners();
         //Desactivamos uno por uno para prevenir la deteccion en la carga
         for (ItemListener listener : listeners) {
-            jComboBox3.removeItemListener(listener);
+            cmbVersion.removeItemListener(listener);
         }
         for(int i=0; i<marcas.size();i++){
             String item = (String) marcas.get(i);
-            jComboBox3.addItem(item);
+            cmbVersion.addItem(item);
         }
         // Reactivamos los ItemListeners
         for (ItemListener listener : listeners) {
-            jComboBox3.addItemListener(listener);
+            cmbVersion.addItemListener(listener);
         }
     }
     
     public void cargarColores(List colores){
-        jComboBox4.removeAllItems();
-        ItemListener[] listeners = jComboBox4.getItemListeners();
+        cmbColor.removeAllItems();
+        ItemListener[] listeners = cmbColor.getItemListeners();
         for (ItemListener listener : listeners) {
-            jComboBox4.removeItemListener(listener);
+            cmbColor.removeItemListener(listener);
         }
         for(int i=0; i<colores.size();i++){
             String item = (String) colores.get(i);
-            jComboBox4.addItem(item);
+            cmbColor.addItem(item);
         }
         for (ItemListener listener : listeners) {
-            jComboBox4.addItemListener(listener);
+            cmbColor.addItemListener(listener);
         }
     }
     
@@ -162,6 +162,10 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
         jLabel7.setText("Precio: $" + precio);
     }
     
+    public void setFechaEntrega(String fecha) {
+        jLabel8.setText("Fecha de entrega: " + fecha);
+    }
+    
     public void setTotal(Double precio){
         jLabel10.setText("Monto total: $" + precio);
     }
@@ -171,13 +175,13 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbMarca = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbModelo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbVersion = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        cmbColor = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -205,19 +209,19 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
 
         jLabel1.setText("Marca");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Modelo");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Version");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbVersion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setText("Color");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Registrar reserva");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -294,12 +298,12 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(114, 114, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -405,19 +409,19 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                 .addGap(48, 48, 48)
                 .addComponent(jLabel1)
                 .addGap(12, 12, 12)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbVersion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -479,11 +483,11 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbColor;
+    private javax.swing.JComboBox<String> cmbMarca;
+    private javax.swing.JComboBox<String> cmbModelo;
+    private javax.swing.JComboBox<String> cmbVersion;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

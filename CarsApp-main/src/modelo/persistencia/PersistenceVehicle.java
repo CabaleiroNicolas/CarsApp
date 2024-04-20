@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.text.Segment;
+import modelo.modelos.Fecha;
 import modelo.modelos.Flete;
 import modelo.modelos.Patentamiento;
 
@@ -185,23 +186,30 @@ public class PersistenceVehicle {
         blanco.setEstado(Estados.DISPONIBLE);
         negro.setEstado(Estados.DISPONIBLE);
         azul.setEstado(Estados.DISPONIBLE);
+        
         ArrayList colores = new ArrayList();
         colores.add(blanco);
         colores.add(negro);
         colores.add(azul);
+        
         lx.setColores(colores);
         lx.setSegmento(segmentoB);
+        
         ex.setColores(colores);
         ex.setSegmento(segmentoB);
+        
         exs.setColores(colores);
         exs.setSegmento(segmentoB);
         exs.setPrecio(16000.00);
+        
         fleteB.setCosto(250.00);
         patentamientoB.setCosto(exs.getPrecio());
         segmentoB.setFlete(fleteB);
         segmentoB.setPatentado(patentamientoB);
         exs.setSegmento(segmentoB);
-
+        
+        exs.setPrecio(1500000.00);
+        exs.setFechaEntrega(new Fecha(24,6,2024));
         //mmodelos fiat
           //cronos
         cronos.getVersiones().addAll(Arrays.asList(drive,atrac,prec,cent));

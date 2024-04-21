@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author ivan
  */
-public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
+public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
 
     /**
      * Creates new form VistaPrincipal
@@ -33,7 +33,8 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
         cmbColor.setVisible(false);
     }
     
-    public void setControlador(controlador.Controlador control){
+    public void setControlador(controlador.Controlador control) {
+        // Evento 1
         cmbMarca.addActionListener(control);
         cmbMarca.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -43,6 +44,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                 cmbModelo.setVisible(true);
             }
         });
+        // Evento 2
         cmbModelo.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_VERSIONES);
@@ -51,6 +53,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                 cmbVersion.setVisible(true);
             }
         });
+        // Evento 3
         cmbVersion.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_COLORES);
@@ -59,6 +62,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                 cmbColor.setVisible(true);
             }
         });
+        // Evento 4
         cmbColor.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_DISPONIBILIDAD);
@@ -88,12 +92,15 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     public String getMarcaSeleccionada(){
         return (String)cmbMarca.getSelectedItem();
     }
+    
     public String getModeloSeleccionado(){
         return (String)cmbModelo.getSelectedItem();
     }
+    
     public String getVersionSeleccionada(){
         return (String)cmbVersion.getSelectedItem();
     }
+    
     public String getColorSeleccionado(){
         return (String)cmbColor.getSelectedItem();
     }
@@ -138,36 +145,43 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     public void cargarColores(List colores){
         cmbColor.removeAllItems();
         ItemListener[] listeners = cmbColor.getItemListeners();
+        
         for (ItemListener listener : listeners) {
             cmbColor.removeItemListener(listener);
         }
+        
         for(int i=0; i<colores.size();i++){
             String item = (String) colores.get(i);
             cmbColor.addItem(item);
         }
+        
         for (ItemListener listener : listeners) {
             cmbColor.addItemListener(listener);
         }
     }
     
     public void setDisponibilidad(boolean flag){
-        if(flag){
-            jLabel6.setText("Disponibilidad: DISPONIBLE");
-            }else
-        { jLabel6.setText("Disponibilidad: NO DISPONIBLE");
+        if(flag) {
+            lblDisponibilidad.setText("Disponibilidad: DISPONIBLE");
+        } else {
+            lblDisponibilidad.setText("Disponibilidad: NO DISPONIBLE");
         }
     }
     
     public void setPrecio(Double precio){
-        jLabel7.setText("Precio: $" + precio);
+        lblPrecio.setText("Precio: $" + precio);
     }
     
     public void setFechaEntrega(String fecha) {
-        jLabel8.setText("Fecha de entrega: " + fecha);
+        lblFechaEntrega.setText("Fecha de entrega: " + fecha);
+    }
+    
+    public void setFechaReserva(String fecha) {
+        lblFechaReserva.setText("Fecha de reserva: " + fecha);
     }
     
     public void setTotal(Double precio){
-        jLabel10.setText("Monto total: $" + precio);
+        lblMontoTotal.setText("Monto total: $" + precio);
     }
     
     @SuppressWarnings("unchecked")
@@ -184,12 +198,12 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
         cmbColor = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lblDisponibilidad = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
+        lblFechaEntrega = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblMontoTotal = new javax.swing.JLabel();
+        lblFechaReserva = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -233,18 +247,18 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Información del vehículo:");
 
-        jLabel6.setText("Disponibilidad:");
+        lblDisponibilidad.setText("Disponibilidad:");
 
-        jLabel7.setText("Precio:");
+        lblPrecio.setText("Precio:");
 
-        jLabel8.setText("Fecha de entrega:");
+        lblFechaEntrega.setText("Fecha de entrega:");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Información de la reserva:");
 
-        jLabel10.setText("Monto total:");
+        lblMontoTotal.setText("Monto total:");
 
-        jLabel11.setText("Fecha de reserva:");
+        lblFechaReserva.setText("Fecha de reserva:");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel12.setText("Cliente:");
@@ -309,14 +323,14 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)))
+                                    .addComponent(lblFechaEntrega)
+                                    .addComponent(lblDisponibilidad)
+                                    .addComponent(lblPrecio)))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5))
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10)
+                            .addComponent(lblFechaReserva)
+                            .addComponent(lblMontoTotal)
                             .addComponent(jLabel12)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
@@ -362,18 +376,18 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jLabel6)
+                        .addComponent(lblDisponibilidad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)
+                        .addComponent(lblPrecio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8))
+                        .addComponent(lblFechaEntrega))
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
+                .addComponent(lblMontoTotal)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel11)
+                .addComponent(lblFechaReserva)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -448,8 +462,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -489,8 +501,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     private javax.swing.JComboBox<String> cmbVersion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -502,9 +512,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -512,5 +519,10 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal{
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel lblDisponibilidad;
+    private javax.swing.JLabel lblFechaEntrega;
+    private javax.swing.JLabel lblFechaReserva;
+    private javax.swing.JLabel lblMontoTotal;
+    private javax.swing.JLabel lblPrecio;
     // End of variables declaration//GEN-END:variables
 }

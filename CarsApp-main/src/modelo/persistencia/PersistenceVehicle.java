@@ -8,26 +8,22 @@ import modelo.modelos.Marca;
 import modelo.modelos.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.swing.text.Segment;
 import modelo.modelos.Fecha;
 import modelo.modelos.Flete;
 import modelo.modelos.Patentamiento;
 
 public class PersistenceVehicle {
 
-    
+    // Asignación de listas de los objetos principales de la lógica de negocio
     private List<Color> colores = new ArrayList<>();
     private List<Marca> marcas = new ArrayList<>();
     private List<Modelo> modelos = new ArrayList<>();
     private List<Segmento> segmentos = new ArrayList<>();
     private List<Version> versiones = new ArrayList<>();
     
-    //Marcas
+    // MARCAS
     private Marca chevrolet = new Marca("Chevrolet");
     private Marca fiat = new Marca("Fiat");
     private Marca honda = new Marca("Honda");
@@ -39,50 +35,41 @@ public class PersistenceVehicle {
     private Marca peugeot = new Marca("Peugeot");
     private Marca ford = new Marca("Ford");
 
-    //Modelos
-
-        //fiat
+    // MODELOS
+        // fiat
     private Modelo cronos = new Modelo("Cronos");
     private Modelo argo = new Modelo("Argo");
     private Modelo mobi = new Modelo("Mobi");
     private Modelo palio = new Modelo("Palio");
     private Modelo punto = new Modelo("Punto");
     private Modelo strada = new Modelo("Strada");
-
-        //chevrolet
+        // chevrolet
     private Modelo cruze = new Modelo("Cruze");
     private Modelo s10 = new Modelo("S10");
-
-        //honda
+        // honda
     private Modelo fit = new Modelo("Fit");
     private Modelo crv = new Modelo("CRV");
     private Modelo city = new Modelo("City");
     private Modelo civic = new Modelo("Civic");
-
-
-        //audi
+        // audi
     private Modelo a1 = new Modelo("A1");
     private Modelo a4 = new Modelo("A4");
     private Modelo tt = new Modelo("TT");
     private Modelo allroad = new Modelo("AllRoad");
-
-
-        //volkswagen
+        // volkswagen
     private Modelo amarok = new Modelo("Amarok"); //camioneta
     private Modelo voyage = new Modelo("Voyage");
     private Modelo t_cross = new Modelo("T-Cross");
     private Modelo vento = new Modelo("Vento");
     private Modelo virtus = new Modelo("Virtus");
-
-        //BMW
+        // BMW
     private Modelo x4 = new Modelo("X4");
     private Modelo x1 = new Modelo("X1");
     private Modelo s4 = new Modelo("Serie 4");
     private Modelo s3 = new Modelo("Serie 3");
 
-    //Versiones
-
-        //fiat
+    // VERSIONES
+        // fiat
     private Version atrac = new Version("1.3 Attractive MT (99cv)");
     private Version drive = new Version("1.3 Drive MT (99cv)");
     private Version prec = new Version("Precision CVT (99cv)");
@@ -96,16 +83,14 @@ public class PersistenceVehicle {
     private Version trek = new Version("Trekking 1.3 JDT");
     private Version work = new Version("Working 1.4 Serie");
     private Version dualo = new Version("Dualogic 5Ptas. (115cv)");
-
-        //chevrolet
+        // chevrolet
     private Version x44 = new Version("2.8 4x4 (200cv)");
     private Version x42 = new Version("2.8 4x2 (180cv)");
     private Version x44H = new Version("2.8 4x4 HIGH Country (210cv)");
     private Version lt4p = new Version("LT MT (141cv) 4Ptas.");
     private Version lt5p = new Version("LT MT (141cv) 5Ptas.");
     private Version ltz = new Version("LTZ (141cv) 4Ptas.");
-
-        //honda
+        // honda
     private Version exl = new Version("EXL MT ABS Cuero (120cv)");
     private Version lx = new Version("LX MT 2ABS (120cv)");
     private Version exs = new Version("EXS Sedán (140cv)");
@@ -115,9 +100,7 @@ public class PersistenceVehicle {
     private Version ex4x4 = new Version("EX 4X4 (185cv)");
     private Version ex4x2 = new Version("EX 4X2 (170cv)");
     private Version lx4x4 = new Version("LX 4X4 (185cv)");
-
-
-        //audi
+        // audi
     private Version ambit = new Version("Ambition (122cv)");
     private Version attrac = new Version("MT Atraction (86cv)");
     private Version sportba = new Version("Sportback 1.4 TFSI (185cv)");
@@ -131,8 +114,7 @@ public class PersistenceVehicle {
     private Version fsi = new Version("FSI (255cv)");//camioneta
     private Version tdi2 = new Version("2.7 TDI (233cv)");//camioneta
     private Version biturb = new Version("2.7 Biturbo Tiptronic");//camioneta
-
-        //volkswagen
+        // volkswagen
     private Version trend4x4 = new Version("2.0 4X4 Trendline (140cv)");//camioneta
     private Version high4x4 = new Version("2.0 4X4 Highline (163cv)");//camioneta
     private Version high4x2 = new Version("2.0 4X2 Highline (163cv)");//camioneta
@@ -147,9 +129,7 @@ public class PersistenceVehicle {
     private Version comf14 = new Version("1.4 TSI Comfortline (150cv)");
     private Version comf14manual = new Version("1.4 MSI Comfortline Manual");
     private Version style16 = new Version("1.6 Style Edition");
-
-
-        //BMW
+        // BMW
     private Version i20 = new Version("20i xDrive Active (184cv)");
     private Version i28 = new Version("28i xDrive xLine (245cv)");
     private Version i35 = new Version("35i xDrive M Package (306cv)");
@@ -166,51 +146,64 @@ public class PersistenceVehicle {
     private Version i320 = new Version("320i Sedán Active (156cv)");
     private Version i325 = new Version("325i Cabrio Pack M (L09)");
 
-
-    //Colores
+    // COLORES
     private Color blanco = new Color("Blanco");
     private Color negro = new Color("Negro");
     private Color azul = new Color("Azul");
-    //Segmentos
+    
+    // SEGMENTOS
     private Segmento segmentoA = new Segmento("Segmento A");
     private Segmento segmentoB = new Segmento("Segmento B");
     private Segmento segmentoC = new Segmento("Segmento C");
-    //Flete
+    
+    // FLETES
     private Flete fleteB = new Flete();
-    //Patentamiento
+    
+    // PATENTAMIENTO
     private Patentamiento patentamientoB = new Patentamiento();
 
-    
     public PersistenceVehicle() {
         
+        // En principio, todos los colores son asignados como disponibles. Luego les cambiamos dicho
+        // estado según corresponda
         blanco.setEstado(Estados.DISPONIBLE);
         negro.setEstado(Estados.DISPONIBLE);
         azul.setEstado(Estados.DISPONIBLE);
         
+        // Creación de lista de colores disponibles para todos los vehículos
         ArrayList colores = new ArrayList();
         colores.add(blanco);
         colores.add(negro);
         colores.add(azul);
         
+        // Asignamos el ArrayList colores a cada versión creada anteriormente
+            // VERSION lx honda
         lx.setColores(colores);
         lx.setSegmento(segmentoB);
-        
+            // VERSION ex honda
         ex.setColores(colores);
         ex.setSegmento(segmentoB);
-        
+            // VERSION exs honda
         exs.setColores(colores);
         exs.setSegmento(segmentoB);
         exs.setPrecio(16000.00);
         
-        fleteB.setCosto(250.00);
+        
+        fleteB.setCosto(25000.00);
         patentamientoB.setCosto(exs.getPrecio());
         segmentoB.setFlete(fleteB);
         segmentoB.setPatentado(patentamientoB);
         exs.setSegmento(segmentoB);
         
+        // Asignamos precio y fecha de entrega del vehículo
+            // VERSION exs honda
         exs.setPrecio(1500000.00);
         exs.setFechaEntrega(new Fecha(24,6,2024));
-        //mmodelos fiat
+        
+        
+        // Asignamos una lista de versiones por cada modelo creado anteriormente
+        
+        // MODELOS fiat
           //cronos
         cronos.getVersiones().addAll(Arrays.asList(drive,atrac,prec,cent));
           //mobi
@@ -222,13 +215,13 @@ public class PersistenceVehicle {
           //punto
         punto.getVersiones().addAll(Arrays.asList(atrac,esse, dualo));
 
-        //modelos chevrolet
+        // MODELOS chevrolet
             //s10
         s10.getVersiones().addAll(Arrays.asList(x42,x44,x44H));
             //cruze
         cruze.getVersiones().addAll(Arrays.asList(ltz,lt4p,lt5p));
 
-        //modelos honda
+        // MODELOS honda
             //city
         city.getVersiones().addAll(Arrays.asList(lx, exl));
             //civic
@@ -238,7 +231,7 @@ public class PersistenceVehicle {
             //crv
         fit.getVersiones().addAll(Arrays.asList(lx4x4,ex4x2,ex4x4));
 
-        //modelos audi
+        // MODELOS audi
             //a1
         a1.getVersiones().addAll(Arrays.asList(attrac,ambit, sportba));
             //a3
@@ -247,9 +240,8 @@ public class PersistenceVehicle {
         tt.getVersiones().addAll(Arrays.asList(rs,coupe1,coupe2,coupe3));
             //allroad
         allroad.getVersiones().addAll(Arrays.asList(tdi2,fsi,biturb));
-
-
-        //modelos volkswagen
+        
+        // MODELOS volkswagen
             //amarok
         amarok.getVersiones().addAll(Arrays.asList(com4x4,com4x2,trend4x4,high4x4,high4x2));
             //voyage
@@ -261,7 +253,7 @@ public class PersistenceVehicle {
             //virtus
         virtus.getVersiones().addAll(Arrays.asList(comf14,comf16,adv14,high14,high16,trend16));
 
-        //modelos bmw
+        // MODELOS bmw
             //x4
         x4.getVersiones().addAll(Arrays.asList(i20,i35,i28,i40));
             //x1
@@ -274,6 +266,7 @@ public class PersistenceVehicle {
         //ex.setSegmento(segmentoC);
         //exs.setSegmento(segmentoC);
        
+       // Asignamos una lista de modelos por cada marca creada anteriormente
         chevrolet.getModelos().addAll(Arrays.asList(s10,cruze));
         honda.getModelos().addAll(Arrays.asList(city,civic,crv,fit));
         fiat.getModelos().addAll(Arrays.asList(cronos,argo,punto,palio,mobi,strada));
@@ -281,8 +274,7 @@ public class PersistenceVehicle {
         vw.getModelos().addAll(Arrays.asList(amarok, voyage, vento,t_cross, virtus));
         bmw.getModelos().addAll(Arrays.asList(s4, x4, s3, x1));
 
-
-
+        // Asignamos la lista de marcas disponibles en esta aplicación
         marcas.addAll(Arrays.asList(chevrolet, vw, honda, fiat, audi, bmw));
         
     }
@@ -315,11 +307,13 @@ public class PersistenceVehicle {
                     .findFirst()
                     .orElse(null);
     }
+    
     public Modelo buscarModelo(Marca marca, String modelo){
         return marca.getModelos().stream().filter(m -> m.getNombre().equals(modelo))
                     .findFirst()
                     .orElse(null);
     }
+    
     public Version buscarVersion(String marca, String modelo, String version){
         Modelo mod = buscarModelo(buscarMarca(marca), modelo);
         return mod.getVersiones().stream().filter(m -> m.getNombre().equals(version))
@@ -342,56 +336,39 @@ public class PersistenceVehicle {
         return colores;
     }
 
-
     public void setColores(List<Color> colores) {
         this.colores = colores;
     }
-
 
     public List<Marca> getMarcas() {
         return marcas;
     }
 
-
     public void setMarcas(List<Marca> marcas) {
         this.marcas = marcas;
     }
-
 
     public List<Modelo> getModelos() {
         return modelos;
     }
 
-
     public void setModelos(List<Modelo> modelos) {
         this.modelos = modelos;
     }
-
 
     public List<Segmento> getSegmentos() {
         return segmentos;
     }
 
-
     public void setSegmentos(List<Segmento> segmentos) {
         this.segmentos = segmentos;
     }
-
 
     public List<Version> getVersiones() {
         return versiones;
     }
 
-
     public void setVersiones(List<Version> versiones) {
         this.versiones = versiones;
     }
-
-    
-    
-   
-    
-    
-    
-    
 }

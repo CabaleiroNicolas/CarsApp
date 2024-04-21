@@ -2,10 +2,7 @@ package modelo.modelos;
 
 public class Patentamiento {
     
-    private Double costo;
-
-    public Patentamiento() {
-    }
+    private double costo;
     
     private final float porcentaje = 2;
     
@@ -13,13 +10,11 @@ public class Patentamiento {
         return porcentaje;
     }
 
-    public Double getCosto() {
+    public double getCosto() {
         return costo;
     }
     
-    
-    
-    public void setCosto(Double monto){
+    public void setCosto(double monto){
         this.costo = monto*0.02;
     }
 }

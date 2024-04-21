@@ -21,6 +21,6 @@ public interface IPrincipal {
     public void setDisponibilidad(boolean flag);
     public void setPrecio(Double precio);
     public void setFechaEntrega(String fecha);
+    public void setFechaReserva(String fecha);
     public void setTotal(Double precio);
-    
 }

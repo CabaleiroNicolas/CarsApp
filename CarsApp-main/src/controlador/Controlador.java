@@ -2,7 +2,10 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import modelo.persistencia.PersistenceVehicle;
 import modelo.modelos.Color;
@@ -23,16 +26,22 @@ public class Controlador implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent event) {
         
-        if(event.getActionCommand().equals(vista.CARGAR_MODELOS)){
+        // Ejecución del evento al hacer click en un item del comboBox Marcas (Evento 1)
+        if(event.getActionCommand().equals(vista.CARGAR_MODELOS)) {
             vista.cargarModelos(modelosByMarca(vista.getMarcaSeleccionada()));
-            
-        } else if(event.getActionCommand().equals(vista.CARGAR_VERSIONES)){
+        }
+        // Ejecución del evento al hacer click en un item del comboBox Modelos (Evento 2)
+        else if(event.getActionCommand().equals(vista.CARGAR_VERSIONES)){
             vista.cargarVersiones(versionByModelo(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado()));
             
-        } else if(event.getActionCommand().equals(vista.CARGAR_COLORES)){
+        }
+        // Ejecución del evento al hacer click en un item del comboBox Versiones (Evento 3)
+        else if(event.getActionCommand().equals(vista.CARGAR_COLORES)){
             vista.cargarColores(coloresByVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada()));
             
-        } else if(event.getActionCommand().equals(vista.CARGAR_DISPONIBILIDAD)){
+        }
+        // Ejecución del evento al hacer click en un item del comboBox Colores (Evento 4)
+        else if(event.getActionCommand().equals(vista.CARGAR_DISPONIBILIDAD)){
             Color aux = persistence.buscarColor(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada(), vista.getColorSeleccionado());
             boolean auxBool = persistence.isDisponible(aux);
             vista.setDisponibilidad(auxBool);
@@ -41,9 +50,14 @@ public class Controlador implements ActionListener{
                 Version auxVer = persistence.buscarVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada());
                 vista.setPrecio(auxVer.getPrecio());
                 
-                String fecha = auxVer.getFechaEntrega().getDia() + "/" + auxVer.getFechaEntrega().getMes() + "/" + auxVer.getFechaEntrega().getAnio();
-                System.out.println(auxVer.getFechaEntrega().getDia());
-                vista.setFechaEntrega(fecha);
+                // La fecha de entrega fue asignada en la creación del objeto Fecha del objeto Version en PersistenceVehicle()
+                String fechaEntrega = auxVer.getFechaEntrega().getDia() + "/" + auxVer.getFechaEntrega().getMes() + "/" + auxVer.getFechaEntrega().getAnio();
+                vista.setFechaEntrega(fechaEntrega);
+                
+                // Para la fecha de reserva obtengo la fecha actual y la formateo según el patrón indicado
+                DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+                Date fechaReserva = new Date();
+                vista.setFechaReserva(formatoFecha.format(fechaReserva));
                 
                 if(auxVer.getSegmento()!= null){
                     System.out.println(auxVer.getSegmento().getNombre());

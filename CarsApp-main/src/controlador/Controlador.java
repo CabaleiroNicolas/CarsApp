@@ -104,7 +104,7 @@ public class Controlador implements ActionListener{
     public List<String> defaultmarcas(){
         List<String> list = new ArrayList<>();
         List<String> aux = persistence.getNombresMarcas();
-        //list.add("Seleccione una marca");
+        list.add("Seleccione una marca");
         list.addAll(aux);
         return list;
     }

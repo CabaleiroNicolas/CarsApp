@@ -38,28 +38,53 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         cmbMarca.addActionListener(control);
         cmbMarca.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_MODELOS);
-                control.actionPerformed(actionEvent);
-                lblModelo.setVisible(true);
-                cmbModelo.setVisible(true);
+                try{
+                    lblModelo.setVisible(false);
+                    cmbModelo.setVisible(false);
+                    lblVersion.setVisible(false);
+                    cmbVersion.setVisible(false);
+                    lblColor.setVisible(false);
+                    cmbColor.setVisible(false);
+                    ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_MODELOS);
+                    control.actionPerformed(actionEvent);
+                    lblModelo.setVisible(true);
+                    cmbModelo.setVisible(true);
+                }catch(NullPointerException ex){
+                    System.out.println("No hay marca seleccionada");
+                }
+                
+                
             }
         });
         // Evento 2
         cmbModelo.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_VERSIONES);
-                control.actionPerformed(actionEvent);
-                lblVersion.setVisible(true);
-                cmbVersion.setVisible(true);
+                try{
+                    lblVersion.setVisible(false);
+                    cmbVersion.setVisible(false);
+                    lblColor.setVisible(false);
+                    cmbColor.setVisible(false);
+                    ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_VERSIONES);
+                    control.actionPerformed(actionEvent);
+                    lblVersion.setVisible(true);
+                    cmbVersion.setVisible(true);
+                }catch(NullPointerException ex){
+                    System.out.println("No hay modelo seleccionado");
+                }
+               
             }
         });
         // Evento 3
         cmbVersion.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_COLORES);
-                control.actionPerformed(actionEvent);
-                lblColor.setVisible(true);
-                cmbColor.setVisible(true);
+                try{
+                    ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_COLORES);
+                    control.actionPerformed(actionEvent);
+                    lblColor.setVisible(true);
+                    cmbColor.setVisible(true);
+                }catch(NullPointerException ex){
+                    System.out.println("No hay version seleccionada");
+                }
             }
         });
         // Evento 4

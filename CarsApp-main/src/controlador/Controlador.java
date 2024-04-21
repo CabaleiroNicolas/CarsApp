@@ -7,15 +7,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import modelo.persistencia.PersistenceVehicle;
+import modelo.modelos.Cliente;
+import modelo.persistencia.Persistence;
 import modelo.modelos.Color;
+import modelo.modelos.EstadosReserva;
+import modelo.modelos.Reserva;
 import modelo.modelos.Version;
 import vista.IPrincipal;
 import vista.VistaPrincipal;
 
 public class Controlador implements ActionListener{
     private IPrincipal vista = new VistaPrincipal();
-    private PersistenceVehicle persistence = new PersistenceVehicle();;
+    private Persistence persistence = new Persistence();
+    private Reserva reserva = new Reserva();
     
     public void ejecutar(){
         vista.setControlador(this);
@@ -25,7 +29,6 @@ public class Controlador implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent event) {
-        
         // Ejecución del evento al hacer click en un item del comboBox Marcas (Evento 1)
         if(event.getActionCommand().equals(vista.CARGAR_MODELOS)) {
             vista.cargarModelos(modelosByMarca(vista.getMarcaSeleccionada()));
@@ -33,12 +36,10 @@ public class Controlador implements ActionListener{
         // Ejecución del evento al hacer click en un item del comboBox Modelos (Evento 2)
         else if(event.getActionCommand().equals(vista.CARGAR_VERSIONES)){
             vista.cargarVersiones(versionByModelo(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado()));
-            
         }
         // Ejecución del evento al hacer click en un item del comboBox Versiones (Evento 3)
         else if(event.getActionCommand().equals(vista.CARGAR_COLORES)){
             vista.cargarColores(coloresByVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada()));
-            
         }
         // Ejecución del evento al hacer click en un item del comboBox Colores (Evento 4)
         else if(event.getActionCommand().equals(vista.CARGAR_DISPONIBILIDAD)){
@@ -50,7 +51,7 @@ public class Controlador implements ActionListener{
                 Version auxVer = persistence.buscarVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada());
                 vista.setPrecio(auxVer.getPrecio());
                 
-                // La fecha de entrega fue asignada en la creación del objeto Fecha del objeto Version en PersistenceVehicle()
+                // La fecha de entrega fue asignada en la creación del objeto Fecha del objeto Version en Persistence()
                 String fechaEntrega = auxVer.getFechaEntrega().getDia() + "/" + auxVer.getFechaEntrega().getMes() + "/" + auxVer.getFechaEntrega().getAnio();
                 vista.setFechaEntrega(fechaEntrega);
                 
@@ -58,14 +59,45 @@ public class Controlador implements ActionListener{
                 DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
                 Date fechaReserva = new Date();
                 vista.setFechaReserva(formatoFecha.format(fechaReserva));
-                
-                if(auxVer.getSegmento()!= null){
-                    System.out.println(auxVer.getSegmento().getNombre());
-                }
+                reserva.setFechaReserva(fechaReserva);
                 
                 double total = auxVer.getPrecio() + auxVer.getSegmento().getFlete().getCosto() + auxVer.getSegmento().getPatentado().getCosto();
                 vista.setTotal(total);
+                reserva.setMontoTotal(total);
+                
+//                if(auxVer.getSegmento()!= null){
+//                    System.out.println(auxVer.getSegmento().getNombre());
+//                }
+                
             }
+        }
+        // Ejecución del evento al hacer click en el botón Buscar (Evento 5)
+        else if(event.getActionCommand().equals(vista.BUSCAR_CLIENTE)) {
+            List<Cliente> clientes = persistence.getClientes();
+            String DNIbuscado = vista.getDNI();
+            boolean encontrado = false;
+            
+            for(Cliente cliente : clientes) {
+                if(cliente.getDNI().equals(DNIbuscado)) {
+                    vista.setInfoBusqueda(cliente.toString());
+                    reserva.setCliente(cliente);
+                    encontrado = true;
+                }
+            }
+            
+            if (!encontrado)
+                vista.setInfoBusqueda("No se encontró el cliente");
+        }
+        // Ejecución del evento al hacer click en el botón Registrar (Evento 6)
+        else if(event.getActionCommand().equals(vista.REGISTRAR_RESERVA)) {
+            vista.limpiarInformacion();
+            if(vista.getSeleccion()) {
+                reserva.setEstado(EstadosReserva.PENDIENTE);
+            } else {
+                reserva.setEstado(EstadosReserva.NULO);
+            }
+            persistence.getReservas().add(reserva);
+            System.out.println(reserva);
         }
     }
     

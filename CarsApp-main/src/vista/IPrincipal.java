@@ -8,6 +8,8 @@ public interface IPrincipal {
     public static String CARGAR_VERSIONES = "Cargar las versiones";
     public static String CARGAR_COLORES = "Cargar los colores";
     public static String CARGAR_DISPONIBILIDAD = "Cargar la disponibilidad del color";
+    public static String BUSCAR_CLIENTE = "Buscar el cliente por DNI";
+    public static String REGISTRAR_RESERVA = "Registrar la reserva del vehiculo";
     public void ejecutar();
     public void cargarMarcas(List marcas);
     public void cargarModelos(List modelos);
@@ -23,4 +25,8 @@ public interface IPrincipal {
     public void setFechaEntrega(String fecha);
     public void setFechaReserva(String fecha);
     public void setTotal(Double precio);
+    public String getDNI();
+    public void setInfoBusqueda(String mensaje);
+    public void limpiarInformacion();
+    public boolean getSeleccion();
 }

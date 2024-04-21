@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ivan/Documentos/CarsApp/CarsApp-main/src/modelo/persistencia/PersistenceVehicle.java</file>
-            <file>file:/home/ivan/Documentos/CarsApp/CarsApp-main/src/vista/VistaPrincipal.java</file>
-            <file>file:/home/ivan/Documentos/CarsApp/CarsApp-main/src/modelo/modelos/Version.java</file>
-            <file>file:/home/ivan/Documentos/CarsApp/CarsApp-main/src/controlador/Controlador.java</file>
-            <file>file:/home/ivan/Documentos/CarsApp/CarsApp-main/src/modelo/modelos/Flete.java</file>
-            <file>file:/home/ivan/Documentos/CarsApp/CarsApp-main/src/modelo/modelos/Patentamiento.java</file>
-            <file>file:/home/ivan/Documentos/CarsApp/CarsApp-main/src/modelo/modelos/Segmento.java</file>
-            <file>file:/home/ivan/Documentos/CarsApp/CarsApp-main/src/vista/IPrincipal.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/vista/VistaPrincipal.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/modelo/persistencia/PersistenceVehicle.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/carsapp/Main.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/modelo/modelos/Version.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/controlador/Controlador.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/vista/IPrincipal.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/modelo/modelos/Color.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/modelo/modelos/Patentamiento.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/CarsApp/CarsApp/CarsApp-main/src/modelo/modelos/Segmento.java</file>
         </group>
     </open-files>
 </project-private>

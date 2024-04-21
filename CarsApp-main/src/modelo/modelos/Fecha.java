@@ -1,6 +1,8 @@
 package modelo.modelos;
 
-public class Fecha {
+import java.util.Date;
+
+public class Fecha extends Date {
     private int dia;
     private int mes;
     private int anio;

@@ -10,13 +10,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import modelo.modelos.Cliente;
 import modelo.modelos.Fecha;
 import modelo.modelos.Flete;
 import modelo.modelos.Patentamiento;
+import modelo.modelos.Reserva;
 
-public class PersistenceVehicle {
+public class Persistence {
 
     // Asignación de listas de los objetos principales de la lógica de negocio
+    private List<Reserva> reservas = new ArrayList<>();
+    private List<Cliente> clientes = new ArrayList<>();
     private List<Color> colores = new ArrayList<>();
     private List<Marca> marcas = new ArrayList<>();
     private List<Modelo> modelos = new ArrayList<>();
@@ -162,9 +166,16 @@ public class PersistenceVehicle {
     // PATENTAMIENTO
     private Patentamiento patentamientoB = new Patentamiento();
 
-    public PersistenceVehicle() {
+    public Persistence() {
         
-        // En principio, todos los colores son asignados como disponibles. Luego les cambiamos dicho
+        clientes.add(new Cliente("44978725", "Leon Breslauer",
+                "Hola 123", "leon.breslauer@alu.frt.utn.edu.ar",
+                "3811234567", "3171234"));
+        clientes.add(new Cliente("44123456", "Lionel Messi",
+                "Hola 456", "lionel.messi@alu.frt.utn.edu.ar",
+                "3814567891", "3179876"));
+        
+        // Al principio, todos los colores son asignados como disponibles. Luego les cambiamos dicho
         // estado según corresponda
         blanco.setEstado(Estados.DISPONIBLE);
         negro.setEstado(Estados.DISPONIBLE);
@@ -294,7 +305,7 @@ public class PersistenceVehicle {
     }
     
     public List<String> getNombresColores(String marca, String modelo, String version){
-        System.out.println(marca + modelo + version);
+        //System.out.println(marca + modelo + version);
         Version ver = buscarVersion(marca, modelo, version);
         if(ver == null){
             System.out.println("NULO");
@@ -330,6 +341,14 @@ public class PersistenceVehicle {
     
     public boolean isDisponible(Color color){
         return (color.getEstado().equals(Estados.DISPONIBLE)) ? true : false;
+    }
+    
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+    
+    public List<Cliente> getClientes() {
+        return clientes;
     }
 
     public List<Color> getColores() {

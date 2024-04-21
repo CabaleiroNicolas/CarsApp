@@ -10,12 +10,12 @@ public class Cliente {
     
     public Cliente(String DNI, String nombreCompleto, String direccion,
             String mail, String celular, String telefono) {
-        DNI = this.DNI;
-        nombreCompleto = this.nombreCompleto;
-        direccion = this.direccion;
-        mail = this.mail;
-        celular = this.celular;
-        telefono = this.telefono;
+        this.DNI = DNI;
+        this.nombreCompleto = nombreCompleto;
+        this.direccion = direccion;
+        this.mail = mail;
+        this.celular = celular;
+        this.telefono = telefono;
     }
 
     public String getDNI() {
@@ -66,5 +66,8 @@ public class Cliente {
         this.telefono = telefono;
     }
     
-    
+    @Override
+    public String toString() {
+        return nombreCompleto + " - " + celular + " - " + telefono;
+    }
 }

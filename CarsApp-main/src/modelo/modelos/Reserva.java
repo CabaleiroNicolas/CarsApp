@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reserva {
+    private int ID;
     private double montoTotal;
     private Date fechaReserva;
     private Cliente cliente;
@@ -16,6 +17,14 @@ public class Reserva {
 //        this.estado = estado;
 //    }
 
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    
     public double getMontoTotal() {
         return montoTotal;
     }
@@ -50,7 +59,8 @@ public class Reserva {
     
     @Override
     public String toString() {
-        return "Cliente: " + cliente.toString() + "\n"
+        return "ID de reserva: " + ID + "\n"
+                + "Cliente: " + cliente.toString() + "\n"
                 + "Fecha reserva: " + new SimpleDateFormat("dd/MM/yyyy").format(fechaReserva) + "\n"
                 + "Monto total: " + montoTotal + "\n"
                 + "Estado reserva: " + estado.toString();

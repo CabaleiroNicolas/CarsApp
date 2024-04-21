@@ -100,6 +100,9 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         // Evento 6
         btnRegistrar.addActionListener(control);
         btnRegistrar.setActionCommand(REGISTRAR_RESERVA);
+        // Evento 7
+        btnVerificar.addActionListener(control);
+        btnVerificar.setActionCommand(VERIFICAR_RESERVA);
     }
     
     public void cargarMarcas(List marcas){
@@ -248,6 +251,14 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         return rdAceptar.isSelected() ? true : false;
     }
     
+    public int getID() {
+        return Integer.parseInt(txtReserva.getText());
+    }
+    
+    public void setInfoReserva(String mensaje) {
+        lblReserva.setText(mensaje);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -276,25 +287,21 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         btnBuscar = new javax.swing.JButton();
         rdAceptar = new javax.swing.JRadioButton();
         rdRechazar = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtReserva = new javax.swing.JTextField();
+        btnVerificar = new javax.swing.JButton();
+        lblReserva = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setText("Marca");
 
-        cmbMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lblModelo.setText("Modelo");
-
-        cmbModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblVersion.setText("Version");
 
-        cmbVersion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lblColor.setText("Color");
-
-        cmbColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnRegistrar.setText("Registrar reserva");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -330,6 +337,11 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         buttonGroup1.add(rdRechazar);
         rdRechazar.setText("Rechazar");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Buscar reserva:");
+
+        btnVerificar.setText("Verificar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -346,7 +358,13 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                             .addComponent(cmbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblColor)
-                            .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnVerificar))
+                            .addComponent(lblReserva))
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFechaEntrega)
@@ -421,12 +439,23 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                         .addGap(18, 18, 18)
                         .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdAceptar)
-                    .addComponent(rdRechazar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnRegistrar)
-                .addGap(17, 17, 17))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rdAceptar)
+                            .addComponent(rdRechazar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(btnRegistrar)
+                        .addGap(17, 17, 17))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVerificar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblReserva)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -471,6 +500,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnVerificar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cmbColor;
@@ -479,6 +509,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     private javax.swing.JComboBox<String> cmbVersion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblBusqueda;
@@ -489,9 +520,11 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     private javax.swing.JLabel lblModelo;
     private javax.swing.JLabel lblMontoTotal;
     private javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblReserva;
     private javax.swing.JLabel lblVersion;
     private javax.swing.JRadioButton rdAceptar;
     private javax.swing.JRadioButton rdRechazar;
     private javax.swing.JTextField txtDNI;
+    private javax.swing.JTextField txtReserva;
     // End of variables declaration//GEN-END:variables
 }

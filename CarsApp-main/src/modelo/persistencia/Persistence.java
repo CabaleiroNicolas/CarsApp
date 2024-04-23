@@ -134,20 +134,20 @@ public class Persistence {
     private Version tdi2 = new Version("2.7 TDI (233cv)");//camioneta
     private Version biturb = new Version("2.7 Biturbo Tiptronic");//camioneta
         // volkswagen
-    private Version trend4x4 = new Version("2.0 4X4 Trendline (140cv)");//camioneta
-    private Version high4x4 = new Version("2.0 4X4 Highline (163cv)");//camioneta
-    private Version high4x2 = new Version("2.0 4X2 Highline (163cv)");//camioneta
-    private Version com4x4 = new Version("2.0 4X4 Comfortline (180cv)");//camioneta
-    private Version com4x2 = new Version("2.0 4X2 Comfortline (170cv)");//camioneta
-    private Version comf16 = new Version("1.6 Comfortline (101cv)");
-    private Version high16 = new Version("1.6 Highline (101cv)");
-    private Version trend16 = new Version("1.6 Trendline (101cv)");
-    private Version adv16 = new Version("1.6 Advance (101cv)");
-    private Version adv14 = new Version("1.4 TSI Advance (101cv)");
-    private Version high14 = new Version("1.4 AT Highline (150cv)");
-    private Version comf14 = new Version("1.4 TSI Comfortline (150cv)");
-    private Version comf14manual = new Version("1.4 MSI Comfortline Manual");
-    private Version style16 = new Version("1.6 Style Edition");
+    private Version trend4x4 = new Version("2.0 4X4 Trendline (140cv)",segmentoC,35000);//camioneta
+    private Version high4x4 = new Version("2.0 4X4 Highline (163cv)", segmentoC,43000);//camioneta
+    private Version high4x2 = new Version("2.0 4X2 Highline (163cv)",segmentoC, 37000);//camioneta
+    private Version com4x4 = new Version("2.0 4X4 Comfortline (180cv)",segmentoC, 33000);//camioneta
+    private Version com4x2 = new Version("2.0 4X2 Comfortline (170cv)",segmentoC, 31000);//camioneta
+    private Version comf16 = new Version("1.6 Comfortline (101cv)",segmentoB, 27000);
+    private Version high16 = new Version("1.6 Highline (101cv)", segmentoB, 29000);
+    private Version trend16 = new Version("1.6 Trendline (101cv)",segmentoA, 25000);
+    private Version adv16 = new Version("1.6 Advance (101cv)",segmentoA, 27000);
+    private Version adv14 = new Version("1.4 TSI Advance (101cv)",segmentoB,25500);
+    private Version high14 = new Version("1.4 AT Highline (150cv)",segmentoB, 28000);
+    private Version comf14 = new Version("1.4 TSI Comfortline (150cv)",segmentoB, 26000);
+    private Version comf14manual = new Version("1.4 MSI Comfortline Manual",segmentoA, 24000);
+    private Version style16 = new Version("1.6 Style Edition",segmentoB, 28000);
         // BMW
     private Version i20 = new Version("20i xDrive Active (184cv)", segmentoA, 30000.00);
     private Version i28 = new Version("28i xDrive xLine (245cv)", segmentoA, 32000.00);
@@ -208,7 +208,7 @@ public class Persistence {
             //fit
         fit.getVersiones().addAll(Arrays.asList(lx,lxs,lxl));
             //crv
-        fit.getVersiones().addAll(Arrays.asList(lx4x4,ex4x2,ex4x4));
+        crv.getVersiones().addAll(Arrays.asList(lx4x4,ex4x2,ex4x4));
 
         // MODELOS audi
             //a1

@@ -45,12 +45,13 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                     cmbVersion.setVisible(false);
                     lblColor.setVisible(false);
                     cmbColor.setVisible(false);
+                    limpiarLabels();
                     ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_MODELOS);
                     control.actionPerformed(actionEvent);
                     lblModelo.setVisible(true);
                     cmbModelo.setVisible(true);
                 }catch(NullPointerException ex){
-                    System.out.println("No hay marca seleccionada");
+                    System.out.print("");
                 }
                 
                 
@@ -64,6 +65,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                     cmbVersion.setVisible(false);
                     lblColor.setVisible(false);
                     cmbColor.setVisible(false);
+                    limpiarLabels();
                     ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_VERSIONES);
                     control.actionPerformed(actionEvent);
                     lblVersion.setVisible(true);
@@ -78,6 +80,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         cmbVersion.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 try{
+                    limpiarLabels();
                     ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_COLORES);
                     control.actionPerformed(actionEvent);
                     lblColor.setVisible(true);
@@ -227,15 +230,17 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     
     public void limpiarInformacion() {
         cmbMarca.setSelectedIndex(0);
-//        cmbModelo.setSelectedIndex(0);
-//        cmbVersion.setSelectedIndex(0);
-//        cmbColor.setSelectedIndex(0);
         lblModelo.setVisible(false);
         lblVersion.setVisible(false);
         lblColor.setVisible(false);
         cmbModelo.setVisible(false); 
         cmbVersion.setVisible(false); 
         cmbColor.setVisible(false);
+        rdAceptar.setSelected(false);
+        rdRechazar.setSelected(false);
+    }
+    
+    public void limpiarLabels() {
         lblDisponibilidad.setText("Disponibilidad:");
         lblPrecio.setText("Precio:");
         lblFechaEntrega.setText("Fecha de entrega:");
@@ -243,8 +248,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         lblFechaReserva.setText("Fecha de reserva:");
         txtDNI.setText("");
         lblBusqueda.setText("");
-        rdAceptar.setSelected(false);
-        rdRechazar.setSelected(false);
     }
     
     public boolean getSeleccion() {

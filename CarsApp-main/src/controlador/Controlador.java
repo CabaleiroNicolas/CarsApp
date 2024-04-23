@@ -21,7 +21,12 @@ public class Controlador implements ActionListener {
 
     private IPrincipal vista = new VistaPrincipal();
     private Persistence persistence = new Persistence();
-    private Reserva reserva = new Reserva();
+    
+    private int ID;
+    private Date fechaReserva;
+    private Cliente cliente;
+    private EstadosReserva estado;
+    private double montoTotal;
 
     public void ejecutar() {
         vista.setControlador(this);
@@ -31,6 +36,7 @@ public class Controlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
+        
         // Ejecución del evento al hacer click en un item del comboBox Marcas (Evento 1)
         if (event.getActionCommand().equals(vista.CARGAR_MODELOS)) {
             vista.cargarModelos(modelosByMarca(vista.getMarcaSeleccionada()));
@@ -56,13 +62,12 @@ public class Controlador implements ActionListener {
 
                 // Para la fecha de reserva obtengo la fecha actual y la formateo según el patrón indicado
                 DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-                Date fechaReserva = new Date();
+                fechaReserva = new Date();
                 vista.setFechaReserva(formatoFecha.format(fechaReserva));
-                reserva.setFechaReserva(fechaReserva);
 
                 double total = auxVer.getPrecio() + auxVer.getSegmento().getFlete().getCosto() + auxVer.getSegmento().getPatentado().getCosto();
                 vista.setTotal(total);
-                reserva.setMontoTotal(total);
+                montoTotal = total;
 
 //                if(auxVer.getSegmento()!= null){
 //                    System.out.println(auxVer.getSegmento().getNombre());
@@ -74,10 +79,10 @@ public class Controlador implements ActionListener {
             String DNIbuscado = vista.getDNI();
             boolean encontrado = false;
 
-            for (Cliente cliente : clientes) {
-                if (cliente.getDNI().equals(DNIbuscado)) {
-                    vista.setInfoBusqueda(cliente.toString());
-                    reserva.setCliente(cliente);
+            for (Cliente cl : clientes) {
+                if (cl.getDNI().equals(DNIbuscado)) {
+                    vista.setInfoBusqueda(cl.toString());
+                    cliente = cl;
                     encontrado = true;
                 }
             }
@@ -87,6 +92,7 @@ public class Controlador implements ActionListener {
             }
         } // Ejecución del evento al hacer click en el botón Registrar (Evento 6)
         else if (event.getActionCommand().equals(vista.REGISTRAR_RESERVA)) {
+            Reserva reserva = new Reserva();
 
             String marcaSel = vista.getMarcaSeleccionada(),
                     modeloSel = vista.getModeloSeleccionado(),
@@ -103,20 +109,28 @@ public class Controlador implements ActionListener {
                 color = null;
             }
 
-            if (color == null || reserva.getCliente() == null
-                    || reserva.getFechaReserva() == null) {
+            if (color == null || cliente == null || fechaReserva == null) {
                 System.out.println("ERROR! Hay algun dato incompleto en la reserva");
             } else {
                 if (vista.getSeleccion()) {
                     color.setEstado(Estados.NO_DISPONIBLE);
 
-                    reserva.setEstado(EstadosReserva.PENDIENTE);
+                    estado = EstadosReserva.PENDIENTE;
                 } else {
-                    reserva.setEstado(EstadosReserva.NULO);
+                    estado = EstadosReserva.NULO;
                 }
 
-                reserva.setID(persistence.getReservas().size() + 1);
+                ID = persistence.getReservas().size() + 1;
+                
+                reserva.setID(ID);
+                reserva.setCliente(cliente);
+                reserva.setEstado(estado);
+                reserva.setFechaReserva(fechaReserva);
+                reserva.setMontoTotal(montoTotal);
+                
+                System.out.println("Antes: " + persistence.getReservas() + "\n");
                 persistence.getReservas().add(reserva);
+                System.out.println("Despues:" + persistence.getReservas() + "\n");
                 vista.limpiarInformacion();
                 System.out.println(reserva);
             }
@@ -124,18 +138,21 @@ public class Controlador implements ActionListener {
         else if (event.getActionCommand().equals(vista.VERIFICAR_RESERVA)) {
             List<Reserva> reservas = persistence.getReservas();
             int IDbuscado = vista.getID();
-            boolean verificado = false;
+            boolean encontrado = false;
 
             for (Reserva res : reservas) {
-                if (res.getID() == IDbuscado) {
+                if (res.getID() == IDbuscado && res.getEstado() == EstadosReserva.PENDIENTE) {
                     res.setEstado(EstadosReserva.VERIFICADO);
                     vista.setInfoReserva("La reserva se verificó con éxito!");
                     System.out.println(res);
-                    verificado = true;
+                    encontrado = true;
+                } else {
+                    vista.setInfoReserva("La reserva tiene estado NULO");
+                    encontrado = true;
                 }
             }
-
-            if (!verificado) {
+            
+            if (!encontrado) {
                 vista.setInfoReserva("No se encontró la reserva");
             }
         }

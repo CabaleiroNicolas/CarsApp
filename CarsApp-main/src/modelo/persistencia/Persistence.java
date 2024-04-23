@@ -149,21 +149,21 @@ public class Persistence {
     private Version comf14manual = new Version("1.4 MSI Comfortline Manual");
     private Version style16 = new Version("1.6 Style Edition");
         // BMW
-    private Version i20 = new Version("20i xDrive Active (184cv)");
-    private Version i28 = new Version("28i xDrive xLine (245cv)");
-    private Version i35 = new Version("35i xDrive M Package (306cv)");
-    private Version i40 = new Version("xDrive M40i (354cv)");
-    private Version i18 = new Version("18i sDrive Advantage (140cv)");
-    private Version d204x4 = new Version("20d xDrive Active AT 4X4 (177cv)");//camioneta
-    private Version d204x2 = new Version("20d xDrive Active MT 4X2 (177cv)");//camioneta
-    private Version i25 = new Version("25i xDrive xLine (204cv)");//camioneta
-    private Version i430 = new Version("430i Coupé M Sport Package (258cv)");
-    private Version i428 = new Version("428i Coupé Sport Line (245cv)");
-    private Version m4comp = new Version("M4 Competition Coupé (510cv) (L23)");
-    private Version m4 = new Version("M4 Coupé (431cv)");
-    private Version d320 = new Version("320d Sedán Executive (184cv) (L09)");
-    private Version i320 = new Version("320i Sedán Active (156cv)");
-    private Version i325 = new Version("325i Cabrio Pack M (L09)");
+    private Version i20 = new Version("20i xDrive Active (184cv)", segmentoA, 30000.00);
+    private Version i28 = new Version("28i xDrive xLine (245cv)", segmentoA, 32000.00);
+    private Version i35 = new Version("35i xDrive M Package (306cv)", segmentoB, 37000.00);
+    private Version i40 = new Version("xDrive M40i (354cv)", segmentoB, 28000.00);
+    private Version i18 = new Version("18i sDrive Advantage (140cv)", segmentoA, 19000.00);
+    private Version d204x4 = new Version("20d xDrive Active AT 4X4 (177cv)", segmentoC, 45000.00);//camioneta
+    private Version d204x2 = new Version("20d xDrive Active MT 4X2 (177cv)", segmentoC, 50000.00);//camioneta
+    private Version i25 = new Version("25i xDrive xLine (204cv)", segmentoC, 48000.00);//camioneta
+    private Version i430 = new Version("430i Coupé M Sport Package (258cv)", segmentoB, 25000.00);
+    private Version i428 = new Version("428i Coupé Sport Line (245cv)", segmentoB, 36500.00);
+    private Version m4comp = new Version("M4 Competition Coupé (510cv) (L23)", segmentoB, 41000.00);
+    private Version m4 = new Version("M4 Coupé (431cv)", segmentoB, 40500.00);
+    private Version d320 = new Version("320d Sedán Executive (184cv) (L09)", segmentoA, 35500.00);
+    private Version i320 = new Version("320i Sedán Active (156cv)", segmentoB, 36000.00);
+    private Version i325 = new Version("325i Cabrio Pack M (L09)", segmentoB, 33000.00);
     
     public Persistence() {
         
@@ -308,7 +308,7 @@ public class Persistence {
     }
     
     public boolean isDisponible(Color color){
-        return (color.getEstado().equals(Estados.DISPONIBLE)) ? true : false;
+        return (color.getEstado().equals(Estados.DISPONIBLE));
     }
     
     public List<Reserva> getReservas() {

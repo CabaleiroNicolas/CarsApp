@@ -17,6 +17,21 @@ import modelo.modelos.Patentamiento;
 import modelo.modelos.Reserva;
 
 public class Persistence {
+    
+    // FLETES
+    private Flete fleteA = new Flete("Rosario", 220);
+    private Flete fleteB = new Flete("Buenos Aires", 250);
+    private Flete fleteC = new Flete("Cordoba", 170);
+    
+    // PATENTAMIENTO
+    private Patentamiento patentamientoA = new Patentamiento();
+    private Patentamiento patentamientoB = new Patentamiento();
+    private Patentamiento patentamientoC = new Patentamiento();
+    
+    // SEGMENTOS
+    private Segmento segmentoA = new Segmento("Segmento A",fleteA,patentamientoA);
+    private Segmento segmentoB = new Segmento("Segmento B",fleteB,patentamientoB);
+    private Segmento segmentoC = new Segmento("Segmento C",fleteC,patentamientoC);
 
     // Asignación de listas de los objetos principales de la lógica de negocio
     private List<Reserva> reservas = new ArrayList<>();
@@ -96,8 +111,8 @@ public class Persistence {
     private Version ltz = new Version("LTZ (141cv) 4Ptas.");
         // honda
     private Version exl = new Version("EXL MT ABS Cuero (120cv)");
-    private Version lx = new Version("LX MT 2ABS (120cv)");
-    private Version exs = new Version("EXS Sedán (140cv)");
+    private Version lx = new Version("LX MT 2ABS (120cv)",segmentoB,22000.00);
+    private Version exs = new Version("EXS Sedán (140cv)",segmentoB,25000.00);
     private Version lxs = new Version("LXS AT Sedán (154cv)");
     private Version lxl = new Version("LXL AT IVTEC (120cv)");
     private Version ex = new Version("EX MT IVTEC");
@@ -149,23 +164,7 @@ public class Persistence {
     private Version d320 = new Version("320d Sedán Executive (184cv) (L09)");
     private Version i320 = new Version("320i Sedán Active (156cv)");
     private Version i325 = new Version("325i Cabrio Pack M (L09)");
-
-    // COLORES
-    private Color blanco = new Color("Blanco");
-    private Color negro = new Color("Negro");
-    private Color azul = new Color("Azul");
     
-    // SEGMENTOS
-    private Segmento segmentoA = new Segmento("Segmento A");
-    private Segmento segmentoB = new Segmento("Segmento B");
-    private Segmento segmentoC = new Segmento("Segmento C");
-    
-    // FLETES
-    private Flete fleteB = new Flete();
-    
-    // PATENTAMIENTO
-    private Patentamiento patentamientoB = new Patentamiento();
-
     public Persistence() {
         
         clientes.add(new Cliente("44978725", "Leon Breslauer",
@@ -175,42 +174,11 @@ public class Persistence {
                 "Hola 456", "lionel.messi@alu.frt.utn.edu.ar",
                 "3814567891", "3179876"));
         
-        // Al principio, todos los colores son asignados como disponibles. Luego les cambiamos dicho
-        // estado según corresponda
-        blanco.setEstado(Estados.DISPONIBLE);
-        negro.setEstado(Estados.DISPONIBLE);
-        azul.setEstado(Estados.DISPONIBLE);
-        
-        // Creación de lista de colores disponibles para todos los vehículos
-        ArrayList colores = new ArrayList();
-        colores.add(blanco);
-        colores.add(negro);
-        colores.add(azul);
-        
-        // Asignamos el ArrayList colores a cada versión creada anteriormente
-            // VERSION lx honda
-        lx.setColores(colores);
-        lx.setSegmento(segmentoB);
-            // VERSION ex honda
-        ex.setColores(colores);
-        ex.setSegmento(segmentoB);
-            // VERSION exs honda
-        exs.setColores(colores);
-        exs.setSegmento(segmentoB);
-        exs.setPrecio(16000.00);
-        
-        
-        fleteB.setCosto(25000.00);
-        patentamientoB.setCosto(exs.getPrecio());
-        segmentoB.setFlete(fleteB);
-        segmentoB.setPatentado(patentamientoB);
-        exs.setSegmento(segmentoB);
-        
         // Asignamos precio y fecha de entrega del vehículo
             // VERSION exs honda
-        exs.setPrecio(1500000.00);
         exs.setFechaEntrega(new Fecha(24,6,2024));
-        
+            // VERSION lx honda
+        lx.setFechaEntrega(new Fecha(25,6,2024));
         
         // Asignamos una lista de versiones por cada modelo creado anteriormente
         

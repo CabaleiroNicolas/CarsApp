@@ -9,18 +9,22 @@ public class Version {
     private Segmento segmento;
     private double precio;
     private Fecha fechaEntrega;
-    private ArrayList<Color> colores;
-
+    private ArrayList<Color> colores = new ArrayList<>();
+    
+    
+    public Version(String nombre, Segmento segmento, double precio) {
+        this.nombre = nombre;
+        this.segmento = segmento;
+        this.precio = precio;
+        rellenarColores();
+    }
+    
     public double getPrecio() {
         return precio;
     }
 
     public void setPrecio(double precio) {
         this.precio = precio;
-    }
-
-    public Version(String nombre) {
-        this.nombre = nombre;
     }
     
     public String getNombre() {
@@ -43,8 +47,17 @@ public class Version {
         return colores;
     }
     
-    public void setColores(ArrayList<Color> colores) {
-        this.colores = colores;
+//    public void setColores(ArrayList<Color> colores) {
+//        this.colores = colores;
+//    }
+    
+    public void rellenarColores() {
+        colores.add(new Color("Blanco"));
+        colores.add(new Color("Negro"));
+        colores.add(new Color("Azul"));
+        colores.add(new Color("Rojo"));
+        
+        for(Color color : colores) color.setEstado(Estados.DISPONIBLE);
     }
     
     public Color getColorByIndex(int index) {

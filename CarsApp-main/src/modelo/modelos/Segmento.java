@@ -7,8 +7,10 @@ public class Segmento {
     private Flete flete;
     private Patentamiento patentado;
 
-    public Segmento(String nombre) {
+    public Segmento(String nombre, Flete flete, Patentamiento patentado) {
         this.nombre = nombre;
+        this.flete = flete;
+        this.patentado = patentado;
     }
 
     public String getNombre() {

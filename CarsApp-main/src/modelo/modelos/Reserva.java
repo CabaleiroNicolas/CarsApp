@@ -10,13 +10,6 @@ public class Reserva {
     private Cliente cliente;
     private EstadosReserva estado;
 
-//    public Reserva(double montoTotal, Fecha fechaReserva, Cliente cliente, EstadosReserva estado) {
-//        this.montoTotal = montoTotal;
-//        this.fechaReserva = fechaReserva;
-//        this.cliente = cliente;
-//        this.estado = estado;
-//    }
-
     public int getID() {
         return ID;
     }
@@ -59,7 +52,7 @@ public class Reserva {
     
     @Override
     public String toString() {
-        return "ID de reserva: " + ID + "\n"
+        return "\nID de reserva: " + ID + "\n"
                 + "Cliente: " + cliente.toString() + "\n"
                 + "Fecha reserva: " + new SimpleDateFormat("dd/MM/yyyy").format(fechaReserva) + "\n"
                 + "Monto total: " + montoTotal + "\n"

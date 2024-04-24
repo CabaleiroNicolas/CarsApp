@@ -68,10 +68,6 @@ public class Controlador implements ActionListener {
                 double total = auxVer.getPrecio() + auxVer.getSegmento().getFlete().getCosto() + auxVer.getSegmento().getPatentado().getCosto();
                 vista.setTotal(total);
                 montoTotal = total;
-
-//                if(auxVer.getSegmento()!= null){
-//                    System.out.println(auxVer.getSegmento().getNombre());
-//                }
             }
         } // Ejecución del evento al hacer click en el botón Buscar (Evento 5)
         else if (event.getActionCommand().equals(vista.BUSCAR_CLIENTE)) {
@@ -93,6 +89,7 @@ public class Controlador implements ActionListener {
         } // Ejecución del evento al hacer click en el botón Registrar (Evento 6)
         else if (event.getActionCommand().equals(vista.REGISTRAR_RESERVA)) {
             Reserva reserva = new Reserva();
+            boolean faltanDatos = false;
 
             String marcaSel = vista.getMarcaSeleccionada(),
                     modeloSel = vista.getModeloSeleccionado(),
@@ -109,14 +106,16 @@ public class Controlador implements ActionListener {
                 color = null;
             }
 
-            boolean band = false;
-            if (color == null || fechaReserva == null) {
-                band=true;
-                vista.mostrarMensaje("error! Faltan datos de vehiculo o no esta disponible");
-            }else if(!band){
-                vista.mostrarMensaje("error! Cliente no seleccionado"); 
-            }
-             else {
+            
+            if(color == null || fechaReserva == null || cliente == null)
+                faltanDatos = true;
+            
+            if (faltanDatos) {
+                if (color == null || fechaReserva == null)
+                    vista.mostrarMensaje("ERROR! Faltan datos de vehiculo o no esta disponible");
+                else
+                    vista.mostrarMensaje("ERROR! Cliente no seleccionado");
+            } else {
                 if (vista.getSeleccion()) {
                     color.setEstado(Estados.NO_DISPONIBLE);
 
@@ -144,7 +143,7 @@ public class Controlador implements ActionListener {
                 System.out.println("Antes: " + persistence.getReservas() + "\n");
                 persistence.getReservas().add(reserva);
                 System.out.println("Despues:" + persistence.getReservas() + "\n");
-                System.out.println(reserva);
+                vista.mostrarMensaje(reserva.toString());
                 
                 vista.limpiarInformacion();
                 cliente = null;
@@ -159,6 +158,7 @@ public class Controlador implements ActionListener {
                 if (res.getID() == IDbuscado && res.getEstado() == EstadosReserva.PENDIENTE) {
                     res.setEstado(EstadosReserva.VERIFICADO);
                     vista.mostrarMensaje("La reserva de "+res.getCliente().getNombreCompleto()+" se verificó con éxito!");
+                    vista.mostrarMensaje(res.toString());
                     encontrado = true;
                 } else if(res.getID() == IDbuscado && res.getEstado() == EstadosReserva.NULO){
                     vista.mostrarMensaje("La reserva no fue aceptada (estado NULO)");

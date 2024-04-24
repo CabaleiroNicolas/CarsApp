@@ -285,7 +285,6 @@ public class Persistence {
     }
     
     public List<String> getNombresColores(String marca, String modelo, String version){
-        //System.out.println(marca + modelo + version);
         Version ver = buscarVersion(marca, modelo, version);
         if(ver == null){
             System.out.println("NULO");

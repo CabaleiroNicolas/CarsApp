@@ -216,7 +216,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     }
     
     public void setPrecio(Double precio){
-        lblPrecio.setText("Precio: $" + precio);
+        lblPrecio.setText("Precio: USD$ " + precio);
     }
     
     public void setFechaEntrega(String fecha) {
@@ -228,7 +228,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     }
     
     public void setTotal(Double precio){
-        lblMontoTotal.setText("Monto total: $" + precio);
+        lblMontoTotal.setText("Monto total: USD$ " + precio);
     }
     
     public String getDNI() {

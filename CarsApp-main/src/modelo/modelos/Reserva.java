@@ -55,7 +55,7 @@ public class Reserva {
         return "\nID de reserva: " + ID + "\n"
                 + "Cliente: " + cliente.toString() + "\n"
                 + "Fecha reserva: " + new SimpleDateFormat("dd/MM/yyyy").format(fechaReserva) + "\n"
-                + "Monto total: " + montoTotal + "\n"
+                + "Monto total: USD$ " + montoTotal + "\n"
                 + "Estado reserva: " + estado.toString();
     }
 }

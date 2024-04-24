@@ -141,12 +141,8 @@ public class Controlador implements ActionListener {
                     vista.mostrarMensaje("La reserva de "+cliente.getNombreCompleto()+" fue exitosa!");
                 }
                 
-                
-                System.out.println("Antes: " + persistence.getReservas() + "\n");
                 persistence.getReservas().add(reserva);
-                System.out.println("Despues:" + persistence.getReservas() + "\n");
                 vista.mostrarMensaje(reserva.toString());
-                
                 vista.limpiarInformacion();
                 cliente = null;
                 fechaReserva = null;

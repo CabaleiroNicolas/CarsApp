@@ -88,51 +88,52 @@ public class Persistence {
     private Modelo s3 = new Modelo("Serie 3");
 
     // VERSIONES
-        // fiat
-    private Version atrac = new Version("1.3 Attractive MT (99cv)");
-    private Version drive = new Version("1.3 Drive MT (99cv)");
-    private Version prec = new Version("Precision CVT (99cv)");
-    private Version cent = new Version("Centenario SL (130cv)");
-    private Version easy = new Version("1.0 Easy (75cv)");
-    private Version like = new Version("1.0 Like (75cv)");
-    private Version way = new Version("1.0 Way Live On (75cv)");
-    private Version esse = new Version("Essence 1.6 5Ptas. (115cv)");
-    private Version fire = new Version("Fire 1.3 3Ptas.");
-    private Version adven = new Version("Adventure 1.8 Extreme");
-    private Version trek = new Version("Trekking 1.3 JDT");
-    private Version work = new Version("Working 1.4 Serie");
-    private Version dualo = new Version("Dualogic 5Ptas. (115cv)");
+        // fiat 
+    private Version atrac = new Version("1.3 Attractive MT (99cv)", segmentoA, 26000.00);
+    private Version drive = new Version("1.3 Drive MT (99cv)", segmentoA, 26500.00);
+    private Version prec = new Version("Precision CVT (99cv)", segmentoB, 30000.00);
+    private Version cent = new Version("Centenario SL (130cv)", segmentoB, 33000.00);
+    private Version easy = new Version("1.0 Easy (75cv)", segmentoA, 25000.00);
+    private Version like = new Version("1.0 Like (75cv)", segmentoA, 25500.00);
+    private Version way = new Version("1.0 Way Live On (75cv)", segmentoA, 25800.00);
+    private Version esse = new Version("Essence 1.6 5Ptas. (115cv)", segmentoB, 28500.00);
+    private Version fire = new Version("Fire 1.3 3Ptas.", segmentoA, 25000.00);
+    private Version adven = new Version("Adventure 1.8 Extreme", segmentoC, 32000.00);
+    private Version trek = new Version("Trekking 1.3 JDT", segmentoC, 31500.00);
+    private Version work = new Version("Working 1.4 Serie", segmentoC, 25500.00);
+    private Version dualo = new Version("Dualogic 5Ptas. (115cv)", segmentoC, 29000.00);
         // chevrolet
-    private Version x44 = new Version("2.8 4x4 (200cv)");
-    private Version x42 = new Version("2.8 4x2 (180cv)");
-    private Version x44H = new Version("2.8 4x4 HIGH Country (210cv)");
-    private Version lt4p = new Version("LT MT (141cv) 4Ptas.");
-    private Version lt5p = new Version("LT MT (141cv) 5Ptas.");
-    private Version ltz = new Version("LTZ (141cv) 4Ptas.");
+    private Version x44 = new Version("2.8 4x4 (200cv)", segmentoC, 34500);
+    private Version x42 = new Version("2.8 4x2 (180cv)", segmentoC, 32000);
+    private Version x44H = new Version("2.8 4x4 HIGH Country (210cv)", segmentoC, 36500);
+    private Version lt4p = new Version("LT MT (141cv) 4Ptas.", segmentoB, 28000);
+    private Version lt5p = new Version("LT MT (141cv) 5Ptas.", segmentoB, 28500);
+    private Version ltz = new Version("LTZ (141cv) 4Ptas.", segmentoB, 29500);
         // honda
-    private Version exl = new Version("EXL MT ABS Cuero (120cv)");
-    private Version lx = new Version("LX MT 2ABS (120cv)",segmentoB,22000.00);
-    private Version exs = new Version("EXS Sedán (140cv)",segmentoB,25000.00);
-    private Version lxs = new Version("LXS AT Sedán (154cv)");
-    private Version lxl = new Version("LXL AT IVTEC (120cv)");
-    private Version ex = new Version("EX MT IVTEC");
-    private Version ex4x4 = new Version("EX 4X4 (185cv)");
-    private Version ex4x2 = new Version("EX 4X2 (170cv)");
-    private Version lx4x4 = new Version("LX 4X4 (185cv)");
+    private Version exl = new Version("EXL MT ABS Cuero (120cv)", segmentoB, 32000);
+    private Version lx = new Version("LX MT 2ABS (120cv)", segmentoB, 22000); // Ya definido, manteniendo el precio
+    private Version exs = new Version("EXS Sedán (140cv)", segmentoB, 25000); // Ya definido, manteniendo el precio
+    private Version lxs = new Version("LXS AT Sedán (154cv)", segmentoB, 33000);
+    private Version lxl = new Version("LXL AT IVTEC (120cv)", segmentoB, 31500);
+    private Version ex = new Version("EX MT IVTEC", segmentoB, 30000);
+    private Version ex4x4 = new Version("EX 4X4 (185cv)", segmentoC, 37000);
+    private Version ex4x2 = new Version("EX 4X2 (170cv)", segmentoC, 34000);
+    private Version lx4x4 = new Version("LX 4X4 (185cv)", segmentoC, 36000);
         // audi
-    private Version ambit = new Version("Ambition (122cv)");
-    private Version attrac = new Version("MT Atraction (86cv)");
-    private Version sportba = new Version("Sportback 1.4 TFSI (185cv)");
-    private Version multitro = new Version("Multitronic Sport (140cv)");
-    private Version tdi1 = new Version("TDI MT Plus (143cv)");
-    private Version quatt = new Version("TFSI Quattro (225cv)");
-    private Version coupe2 = new Version("Coupé 2.0 MT (211cv)");
-    private Version coupe1 = new Version("Coupé 1.8T Sport (160cv)");
-    private Version coupe3 = new Version("Coupé 3.2 V6 MT (250cv)");
-    private Version rs = new Version("RS 2.5T FSI (340cv)");
-    private Version fsi = new Version("FSI (255cv)");//camioneta
-    private Version tdi2 = new Version("2.7 TDI (233cv)");//camioneta
-    private Version biturb = new Version("2.7 Biturbo Tiptronic");//camioneta
+    private Version ambit = new Version("Ambition (122cv)", segmentoB, 35000);
+    private Version attrac = new Version("MT Atraction (86cv)", segmentoA, 35000);
+    private Version sportba = new Version("Sportback 1.4 TFSI (185cv)", segmentoB, 38000);
+    private Version multitro = new Version("Multitronic Sport (140cv)", segmentoB, 36000);
+    private Version tdi1 = new Version("TDI MT Plus (143cv)", segmentoB, 37000);
+    private Version quatt = new Version("TFSI Quattro (225cv)", segmentoB, 39000);
+    private Version coupe2 = new Version("Coupé 2.0 MT (211cv)", segmentoB, 37500);
+    private Version coupe1 = new Version("Coupé 1.8T Sport (160cv)", segmentoB, 35000);
+    private Version coupe3 = new Version("Coupé 3.2 V6 MT (250cv)", segmentoB, 40000);
+    private Version rs = new Version("RS 2.5T FSI (340cv)", segmentoB, 40000);
+    private Version fsi = new Version("FSI (255cv)", segmentoC, 38000); // camioneta
+    private Version tdi2 = new Version("2.7 TDI (233cv)", segmentoC, 39000); // camioneta
+    private Version biturb = new Version("2.7 Biturbo Tiptronic", segmentoC, 40000); // camioneta
+
         // volkswagen
     private Version trend4x4 = new Version("2.0 4X4 Trendline (140cv)",segmentoC,35000);//camioneta
     private Version high4x4 = new Version("2.0 4X4 Highline (163cv)", segmentoC,43000);//camioneta
@@ -173,6 +174,17 @@ public class Persistence {
         clientes.add(new Cliente("44123456", "Lionel Messi",
                 "Hola 456", "lionel.messi@alu.frt.utn.edu.ar",
                 "3814567891", "3179876"));
+        clientes.add(new Cliente("45124671", "Matias Alderete",
+                "Hola 123", "Gustavo.alderete@alu.frt.utn.edu.ar",
+                "3812345678", "123456"));
+        clientes.add(new Cliente("44580815", "Nicolas Cabaleiro",
+                "Hola 456", "nicolas.cabaleiro@alu.frt.utn.edu.ar",
+                "3811214125", "1425152"));
+        clientes.add(new Cliente("41383873", "Ivan Ochoa",
+                "Hola 456", "ivan.ochoa@alu.frt.utn.edu.ar",
+                "3811214125", "1425152"));
+        
+        
         
         // Asignamos precio y fecha de entrega del vehículo
             // VERSION exs honda

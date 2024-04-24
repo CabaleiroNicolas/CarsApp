@@ -1,6 +1,8 @@
 
 package modelo.modelos;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Version {
@@ -16,6 +18,7 @@ public class Version {
         this.nombre = nombre;
         this.segmento = segmento;
         this.precio = precio;
+        this.fechaEntrega= fechaDinamica();
         rellenarColores();
     }
     
@@ -71,9 +74,14 @@ public class Version {
     public void setFechaEntrega(Fecha fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
-    
-    
-    
+    private Fecha fechaDinamica() {
+        LocalDate fechaActual = LocalDate.now();
+        // Sumar dias aleatorios aa la fecha actual para que no tengan todos la misma fecha de entrega
+        LocalDate fechaFutura = fechaActual.plusDays(10 + (int)(Math.random() * ((15 - 10) + 1)));
+        // Crear un objeto Fecha usando LocalDate p/devolver 
+        return new Fecha(fechaFutura.getDayOfMonth(), fechaFutura.getMonthValue(), fechaFutura.getYear());
+    }
+
     @Override
     public String toString() {
         return "\n" + nombre + ", segmento=" + segmento + "\ncolores: " + colores;

@@ -88,7 +88,7 @@ public class Controlador implements ActionListener {
             }
 
             if (!encontrado) {
-                vista.setInfoBusqueda("No se encontró el cliente");
+                vista.mostrarMensaje("Cliente no encontrado!");
             }
         } // Ejecución del evento al hacer click en el botón Registrar (Evento 6)
         else if (event.getActionCommand().equals(vista.REGISTRAR_RESERVA)) {
@@ -109,9 +109,14 @@ public class Controlador implements ActionListener {
                 color = null;
             }
 
-            if (color == null || cliente == null || fechaReserva == null) {
-                System.out.println("ERROR! Hay algun dato incompleto en la reserva");
-            } else {
+            boolean band = false;
+            if (color == null || fechaReserva == null) {
+                band=true;
+                vista.mostrarMensaje("error! Faltan datos de vehiculo o no esta disponible");
+            }else if(!band){
+                vista.mostrarMensaje("error! Cliente no seleccionado"); 
+            }
+             else {
                 if (vista.getSeleccion()) {
                     color.setEstado(Estados.NO_DISPONIBLE);
 
@@ -128,11 +133,21 @@ public class Controlador implements ActionListener {
                 reserva.setFechaReserva(fechaReserva);
                 reserva.setMontoTotal(montoTotal);
                 
+                if(estado == EstadosReserva.NULO){
+                    vista.mostrarMensaje("Reserva almacenada con estado 'NULO'");
+                }
+                else{
+                    vista.mostrarMensaje("La reserva de "+cliente.getNombreCompleto()+" fue exitosa!");
+                }
+                
+                
                 System.out.println("Antes: " + persistence.getReservas() + "\n");
                 persistence.getReservas().add(reserva);
                 System.out.println("Despues:" + persistence.getReservas() + "\n");
-                vista.limpiarInformacion();
                 System.out.println(reserva);
+                
+                vista.limpiarInformacion();
+                cliente = null;
             }
         } // Ejecución del evento al hacer click en el botón Verificar (Evento 7)
         else if (event.getActionCommand().equals(vista.VERIFICAR_RESERVA)) {
@@ -143,17 +158,16 @@ public class Controlador implements ActionListener {
             for (Reserva res : reservas) {
                 if (res.getID() == IDbuscado && res.getEstado() == EstadosReserva.PENDIENTE) {
                     res.setEstado(EstadosReserva.VERIFICADO);
-                    vista.setInfoReserva("La reserva se verificó con éxito!");
-                    System.out.println(res);
+                    vista.mostrarMensaje("La reserva de "+res.getCliente().getNombreCompleto()+" se verificó con éxito!");
                     encontrado = true;
-                } else {
-                    vista.setInfoReserva("La reserva tiene estado NULO");
+                } else if(res.getID() == IDbuscado && res.getEstado() == EstadosReserva.NULO){
+                    vista.mostrarMensaje("La reserva no fue aceptada (estado NULO)");
                     encontrado = true;
                 }
             }
             
             if (!encontrado) {
-                vista.setInfoReserva("No se encontró la reserva");
+                vista.mostrarMensaje("No se encontró la reserva");            
             }
         }
     }

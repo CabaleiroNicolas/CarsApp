@@ -32,4 +32,5 @@ public interface IPrincipal {
     public boolean getSeleccion();
     public int getID();
     public void setInfoReserva(String mensaje);
+    public void mostrarMensaje(String mensaje);
 }

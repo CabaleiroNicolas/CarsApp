@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -250,6 +251,10 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         lblBusqueda.setText("");
     }
     
+    public void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje); 
+    }
+    
     public boolean getSeleccion() {
         return rdAceptar.isSelected() ? true : false;
     }
@@ -441,13 +446,13 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                         .addComponent(lblColor)
                         .addGap(18, 18, 18)
                         .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rdAceptar)
                             .addComponent(rdRechazar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(btnRegistrar)
                         .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()

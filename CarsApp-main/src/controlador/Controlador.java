@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import modelo.modelos.Cliente;
-import modelo.persistencia.Persistence;
+import modelo.persistencia.Persistencia;
 import modelo.modelos.Color;
 import modelo.modelos.Estados;
 import modelo.modelos.EstadosReserva;
+import modelo.modelos.Patentamiento;
 import modelo.modelos.Reserva;
 import modelo.modelos.Version;
 import vista.IPrincipal;
@@ -20,7 +21,7 @@ import vista.VistaPrincipal;
 public class Controlador implements ActionListener {
 
     private IPrincipal vista = new VistaPrincipal();
-    private Persistence persistence = new Persistence();
+    private Persistencia persistencia = new Persistencia();
     
     private int ID;
     private Date fechaReserva;
@@ -48,12 +49,13 @@ public class Controlador implements ActionListener {
             vista.cargarColores(coloresByVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada()));
         } // Ejecución del evento al hacer click en un item del comboBox Colores (Evento 4)
         else if (event.getActionCommand().equals(vista.CARGAR_DISPONIBILIDAD)) {
-            Color aux = persistence.buscarColor(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada(), vista.getColorSeleccionado());
-            boolean auxBool = persistence.isDisponible(aux);
+            Color aux = persistencia.buscarColor(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada(), vista.getColorSeleccionado());
+            boolean auxBool = persistencia.isDisponible(aux);
             vista.setDisponibilidad(auxBool);
 
             if (auxBool) {
-                Version auxVer = persistence.buscarVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada());
+                Patentamiento patentamiento = new Patentamiento();
+                Version auxVer = persistencia.buscarVersion(vista.getMarcaSeleccionada(), vista.getModeloSeleccionado(), vista.getVersionSeleccionada());
                 vista.setPrecio(auxVer.getPrecio());
 
                 // La fecha de entrega fue asignada en la creación del objeto Fecha del objeto Version en Persistence()
@@ -65,13 +67,14 @@ public class Controlador implements ActionListener {
                 fechaReserva = new Date();
                 vista.setFechaReserva(formatoFecha.format(fechaReserva));
 
-                double total = auxVer.getPrecio() + auxVer.getSegmento().getFlete().getCosto() + auxVer.getSegmento().getPatentado().getCosto();
+                patentamiento.setCosto(auxVer.getPrecio());
+                double total = auxVer.getPrecio() + auxVer.getSegmento().getFlete().getCosto() + patentamiento.getCosto();
                 vista.setTotal(total);
                 montoTotal = total;
             }
         } // Ejecución del evento al hacer click en el botón Buscar (Evento 5)
         else if (event.getActionCommand().equals(vista.BUSCAR_CLIENTE)) {
-            List<Cliente> clientes = persistence.getClientes();
+            List<Cliente> clientes = persistencia.getClientes();
             String DNIbuscado = vista.getDNI();
             boolean encontrado = false;
 
@@ -101,7 +104,7 @@ public class Controlador implements ActionListener {
             
             if(!marcaSel.equals("Seleccione una marca") && modeloSel != null
                     && versionSel != null && colorSel != null) {
-                color = persistence.buscarColor(marcaSel,
+                color = persistencia.buscarColor(marcaSel,
                     modeloSel, versionSel,
                     colorSel);
             } else {
@@ -126,7 +129,7 @@ public class Controlador implements ActionListener {
                     estado = EstadosReserva.NULO;
                 }
 
-                ID = persistence.getReservas().size() + 1;
+                ID = persistencia.getReservas().size() + 1;
                 
                 reserva.setID(ID);
                 reserva.setCliente(cliente);
@@ -141,7 +144,7 @@ public class Controlador implements ActionListener {
                     vista.mostrarMensaje("La reserva de "+cliente.getNombreCompleto()+" fue exitosa!");
                 }
                 
-                persistence.getReservas().add(reserva);
+                persistencia.getReservas().add(reserva);
                 vista.mostrarMensaje(reserva.toString());
                 vista.limpiarInformacion();
                 cliente = null;
@@ -149,7 +152,7 @@ public class Controlador implements ActionListener {
             }
         } // Ejecución del evento al hacer click en el botón Verificar (Evento 7)
         else if (event.getActionCommand().equals(vista.VERIFICAR_RESERVA)) {
-            List<Reserva> reservas = persistence.getReservas();
+            List<Reserva> reservas = persistencia.getReservas();
             int IDbuscado = vista.getID();
             boolean encontrado = false;
 
@@ -173,7 +176,7 @@ public class Controlador implements ActionListener {
 
     public List<String> defaultmarcas() {
         List<String> list = new ArrayList<>();
-        List<String> aux = persistence.getNombresMarcas();
+        List<String> aux = persistencia.getNombresMarcas();
         list.add("Seleccione una marca");
         list.addAll(aux);
         return list;
@@ -181,7 +184,7 @@ public class Controlador implements ActionListener {
 
     public List<String> modelosByMarca(String marca) {
         List<String> list = new ArrayList<>();
-        List<String> aux = persistence.getNombresModelos(marca);
+        List<String> aux = persistencia.getNombresModelos(marca);
         list.add("Seleccione un modelo");
         list.addAll(aux);
         return list;
@@ -189,7 +192,7 @@ public class Controlador implements ActionListener {
 
     public List<String> versionByModelo(String marca, String modelo) {
         List<String> list = new ArrayList<>();
-        List<String> aux = persistence.getNombresVersiones(marca, modelo);
+        List<String> aux = persistencia.getNombresVersiones(marca, modelo);
         list.add("Seleccione una version");
         list.addAll(aux);
         return list;
@@ -197,7 +200,7 @@ public class Controlador implements ActionListener {
 
     public List<String> coloresByVersion(String marca, String modelo, String version) {
         List<String> list = new ArrayList<>();
-        List<String> aux = persistence.getNombresColores(marca, modelo, version);
+        List<String> aux = persistencia.getNombresColores(marca, modelo, version);
         list.add("Seleccione un color");
         list.addAll(aux);
         return list;

@@ -16,7 +16,7 @@ import modelo.modelos.Flete;
 import modelo.modelos.Patentamiento;
 import modelo.modelos.Reserva;
 
-public class Persistence {
+public class Persistencia {
     
     // FLETES
     private Flete fleteA = new Flete("Rosario", 220);
@@ -49,10 +49,6 @@ public class Persistence {
     private Marca audi = new Marca("Audi");
     private Marca vw = new Marca("Volkswagen");
     private Marca bmw = new Marca("BMW");
-    private Marca jeep = new Marca("Jeep");
-    private Marca renault = new Marca("Renault");
-    private Marca peugeot = new Marca("Peugeot");
-    private Marca ford = new Marca("Ford");
 
     // MODELOS
         // fiat
@@ -166,7 +162,7 @@ public class Persistence {
     private Version i320 = new Version("320i Sedán Active (156cv)", segmentoB, 36000.00);
     private Version i325 = new Version("325i Cabrio Pack M (L09)", segmentoB, 33000.00);
     
-    public Persistence() {
+    public Persistencia() {
         
         clientes.add(new Cliente("44978725", "Leon Breslauer",
                 "Hola 123", "leon.breslauer@alu.frt.utn.edu.ar",
@@ -260,7 +256,7 @@ public class Persistence {
        // Asignamos una lista de modelos por cada marca creada anteriormente
         chevrolet.getModelos().addAll(Arrays.asList(s10,cruze));
         honda.getModelos().addAll(Arrays.asList(city,civic,crv,fit));
-        fiat.getModelos().addAll(Arrays.asList(cronos,argo,punto,palio,mobi,strada));
+        fiat.getModelos().addAll(Arrays.asList(cronos,punto,palio,mobi,strada));
         audi.getModelos().addAll(Arrays.asList(a1, a4, tt, allroad));
         vw.getModelos().addAll(Arrays.asList(amarok, voyage, vento,t_cross, virtus));
         bmw.getModelos().addAll(Arrays.asList(s4, x4, s3, x1));

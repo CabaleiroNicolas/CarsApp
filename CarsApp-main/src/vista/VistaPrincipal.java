@@ -262,6 +262,10 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         jLabel3.setText("");
     }
     
+    public void limpiarLabelCliente(){
+        lblBusqueda.setText("");
+    }
+    
     public void mostrarMensaje(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje,"Aviso",JOptionPane.INFORMATION_MESSAGE); 
     }

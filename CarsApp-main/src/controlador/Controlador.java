@@ -84,7 +84,9 @@ public class Controlador implements ActionListener {
             }
 
             if (!encontrado) {
+                vista.limpiarLabelCliente();
                 vista.mostrarMensaje("Cliente no encontrado!");
+                cliente = null;
             }
         } // Ejecución del evento al hacer click en el botón Registrar (Evento 6)
         else if (event.getActionCommand().equals(vista.REGISTRAR_RESERVA)) {
@@ -102,7 +104,6 @@ public class Controlador implements ActionListener {
                 color = persistence.buscarColor(marcaSel,
                     modeloSel, versionSel,
                     colorSel);
-                System.out.println("MAMAMA");
             } else {
                 color = null;
             }

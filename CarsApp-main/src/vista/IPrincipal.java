@@ -33,4 +33,5 @@ public interface IPrincipal {
     public int getID();
     public void setInfoReserva(String mensaje);
     public void mostrarMensaje(String mensaje);
+    public void limpiarLabelCliente();
 }

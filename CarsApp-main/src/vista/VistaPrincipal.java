@@ -4,6 +4,7 @@
  */
 package vista;
 
+import java.awt.Color;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
@@ -81,6 +82,8 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         cmbVersion.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 try{
+                    lblColor.setVisible(false);
+                    cmbColor.setVisible(false);
                     limpiarLabels();
                     ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_COLORES);
                     control.actionPerformed(actionEvent);
@@ -94,8 +97,13 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         // Evento 4
         cmbColor.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_DISPONIBILIDAD);
-                control.actionPerformed(actionEvent);
+                try{
+                    ActionEvent actionEvent = new ActionEvent(cmbMarca, ActionEvent.ACTION_PERFORMED, CARGAR_DISPONIBILIDAD);
+                    control.actionPerformed(actionEvent);
+                }
+                catch(NullPointerException ex){
+                    System.out.println("No hay color seleccionado");
+                }
             }
         });
         // Evento 5
@@ -199,9 +207,11 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     
     public void setDisponibilidad(boolean flag){
         if(flag) {
-            lblDisponibilidad.setText("Disponibilidad: DISPONIBLE");
+            jLabel3.setText("DISPONIBLE");
+            jLabel3.setForeground(Color.GREEN);
         } else {
-            lblDisponibilidad.setText("Disponibilidad: NO DISPONIBLE");
+            jLabel3.setText("NO DISPONIBLE");
+            jLabel3.setForeground(Color.RED);
         }
     }
     
@@ -249,6 +259,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         lblFechaReserva.setText("Fecha de reserva:");
         txtDNI.setText("");
         lblBusqueda.setText("");
+        jLabel3.setText("");
     }
     
     public void mostrarMensaje(String mensaje){
@@ -299,6 +310,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         txtReserva = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
         lblReserva = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -376,7 +388,6 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFechaEntrega)
-                            .addComponent(lblDisponibilidad)
                             .addComponent(lblPrecio)
                             .addComponent(lblFechaReserva)
                             .addComponent(lblMontoTotal)
@@ -395,11 +406,15 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                                 .addGap(18, 18, 18)
                                 .addComponent(rdRechazar))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDisponibilidad)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel9))))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,7 +423,9 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(lblDisponibilidad)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDisponibilidad)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblPrecio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -516,6 +533,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblBusqueda;

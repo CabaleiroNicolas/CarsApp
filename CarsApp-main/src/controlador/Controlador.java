@@ -102,6 +102,7 @@ public class Controlador implements ActionListener {
                 color = persistence.buscarColor(marcaSel,
                     modeloSel, versionSel,
                     colorSel);
+                System.out.println("MAMAMA");
             } else {
                 color = null;
             }
@@ -147,6 +148,7 @@ public class Controlador implements ActionListener {
                 
                 vista.limpiarInformacion();
                 cliente = null;
+                fechaReserva = null;
             }
         } // Ejecución del evento al hacer click en el botón Verificar (Evento 7)
         else if (event.getActionCommand().equals(vista.VERIFICAR_RESERVA)) {

@@ -12,6 +12,8 @@ import modelo.persistencia.Persistencia;
 import modelo.modelos.Color;
 import modelo.modelos.Estados;
 import modelo.modelos.EstadosReserva;
+import modelo.modelos.Marca;
+import modelo.modelos.Modelo;
 import modelo.modelos.Patentamiento;
 import modelo.modelos.Reserva;
 import modelo.modelos.Version;
@@ -76,11 +78,13 @@ public class Controlador implements ActionListener {
         else if (event.getActionCommand().equals(vista.BUSCAR_CLIENTE)) {
             List<Cliente> clientes = persistencia.getClientes();
             String DNIbuscado = vista.getDNI();
+            
             boolean encontrado = false;
 
             for (Cliente cl : clientes) {
                 if (cl.getDNI().equals(DNIbuscado)) {
                     vista.setInfoBusqueda(cl.toString());
+                    
                     cliente = cl;
                     encontrado = true;
                 }
@@ -90,6 +94,8 @@ public class Controlador implements ActionListener {
                 vista.limpiarLabelCliente();
                 vista.mostrarMensaje("Cliente no encontrado!");
                 cliente = null;
+            }else{
+                llenarTablaReservas(DNIbuscado,cliente.getNombreCompleto());
             }
         } // Ejecución del evento al hacer click en el botón Registrar (Evento 6)
         else if (event.getActionCommand().equals(vista.REGISTRAR_RESERVA)) {
@@ -101,7 +107,6 @@ public class Controlador implements ActionListener {
                     versionSel = vista.getVersionSeleccionada(),
                     colorSel = vista.getColorSeleccionado();
             Color color;
-            
             if(!marcaSel.equals("Seleccione una marca") && modeloSel != null
                     && versionSel != null && colorSel != null) {
                 color = persistencia.buscarColor(marcaSel,
@@ -110,7 +115,9 @@ public class Controlador implements ActionListener {
             } else {
                 color = null;
             }
-
+            if(cliente !=null){
+                llenarTablaReservas(cliente.getDNI(),cliente.getNombreCompleto());
+            }
             
             if(color == null || fechaReserva == null || cliente == null)
                 faltanDatos = true;
@@ -121,6 +128,9 @@ public class Controlador implements ActionListener {
                 else
                     vista.mostrarMensaje("ERROR! Cliente no seleccionado");
             } else {
+                Marca marca = persistencia.buscarMarca(marcaSel);
+                Modelo modelo = persistencia.buscarModelo(marca, modeloSel);
+                Version version = persistencia.buscarVersion(marcaSel, modeloSel, versionSel);
                 if (vista.getSeleccion()) {
                     color.setEstado(Estados.NO_DISPONIBLE);
 
@@ -136,6 +146,10 @@ public class Controlador implements ActionListener {
                 reserva.setEstado(estado);
                 reserva.setFechaReserva(fechaReserva);
                 reserva.setMontoTotal(montoTotal);
+                reserva.setMarca(marca);
+                reserva.setModelo(modelo);
+                reserva.setVersion(version);
+                reserva.setColor(color);
                 
                 if(estado == EstadosReserva.NULO){
                     vista.mostrarMensaje("Reserva almacenada con estado 'NULO'");
@@ -146,6 +160,7 @@ public class Controlador implements ActionListener {
                 
                 persistencia.getReservas().add(reserva);
                 vista.mostrarMensaje(reserva.toString());
+                llenarTablaReservas(cliente.getDNI(),cliente.getNombreCompleto());
                 vista.limpiarInformacion();
                 cliente = null;
                 fechaReserva = null;
@@ -204,6 +219,10 @@ public class Controlador implements ActionListener {
         list.add("Seleccione un color");
         list.addAll(aux);
         return list;
+    }
+    public void llenarTablaReservas(String dni,String nombre){
+        vista.lblTablaReserva(nombre);
+        vista.llenarTabla(persistencia.obtenerReservasCliente(dni));
     }
 
 }

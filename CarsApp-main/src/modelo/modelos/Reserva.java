@@ -9,6 +9,10 @@ public class Reserva {
     private Date fechaReserva;
     private Cliente cliente;
     private EstadosReserva estado;
+    private Modelo modelo;
+    private Marca marca;
+    private Version version;
+    private Color color;
 
     public int getID() {
         return ID;
@@ -56,6 +60,42 @@ public class Reserva {
                 + "Cliente: " + cliente.toString() + "\n"
                 + "Fecha reserva: " + new SimpleDateFormat("dd/MM/yyyy").format(fechaReserva) + "\n"
                 + "Monto total: USD$ " + montoTotal + "\n"
-                + "Estado reserva: " + estado.toString();
+                + "Estado reserva: " + estado.toString()
+                + "Marca: " + marca.getNombre()+"\n"
+                + "Modelo: "+modelo.getNombre()+"\n"
+                + "Version:"+version.getNombre()+"\n"
+                + "Color:"+ color.getNombre();
+    }
+
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public Version getVersion() {
+        return version;
+    }
+
+    public void setVersion(Version version) {
+        this.version = version;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

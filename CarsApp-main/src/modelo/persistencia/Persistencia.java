@@ -17,7 +17,7 @@ import modelo.modelos.Patentamiento;
 import modelo.modelos.Reserva;
 
 public class Persistencia {
-    
+
     // FLETES
     private Flete fleteA = new Flete("Rosario", 220);
     private Flete fleteB = new Flete("Buenos Aires", 250);
@@ -312,6 +312,11 @@ public class Persistencia {
         return ver.getColores().stream().filter(m -> m.getNombre().equals(color))
                     .findFirst()
                     .orElse(null);
+    }
+    public List<Reserva> obtenerReservasCliente(String dni) {
+        return reservas.stream() 
+            .filter(r -> r.getCliente().getDNI().equals(dni)) 
+            .collect(Collectors.toList());
     }
     
     public boolean isDisponible(Color color){

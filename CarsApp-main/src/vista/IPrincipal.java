@@ -1,6 +1,7 @@
 package vista;
 
 import java.util.List;
+import modelo.modelos.Reserva;
 
 public interface IPrincipal {
     public static String CARGAR_MARCAS = "Cargar las marcas";
@@ -34,4 +35,7 @@ public interface IPrincipal {
     public void setInfoReserva(String mensaje);
     public void mostrarMensaje(String mensaje);
     public void limpiarLabelCliente();
+    public void llenarTabla(List<Reserva> reservas);
+    public void lblTablaReserva(String mensaje);
+
 }

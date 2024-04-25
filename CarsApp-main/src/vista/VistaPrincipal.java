@@ -4,7 +4,7 @@
  */
 package vista;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+//import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
@@ -31,6 +31,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
 
     public void ejecutar(){
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
         lblModelo.setVisible(false);
         cmbModelo.setVisible(false);
         lblVersion.setVisible(false);
@@ -119,6 +120,9 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         // Evento 7
         btnVerificar.addActionListener(control);
         btnVerificar.setActionCommand(VERIFICAR_RESERVA);
+        //Evento 8
+        btnBuscarR.addActionListener(control);
+        btnBuscarR.setActionCommand(BUSCAR_RESERVA);
     }
     
     public void cargarMarcas(List marcas){
@@ -234,10 +238,22 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
 
             tabla.addRow(fila); 
         }
-
-
         jTable1.setModel(tabla);
     }
+    public void limpiarTabla() {
+        DefaultTableModel tabla = new DefaultTableModel();
+        tabla.addColumn("ID");
+        tabla.addColumn("FR");
+        tabla.addColumn("FE");
+        tabla.addColumn("Monto");
+        tabla.addColumn("Estado");
+        tabla.addColumn("Marca");
+        tabla.addColumn("Modelo");
+        tabla.addColumn("Versión");
+        tabla.addColumn("Color");
+        jTable1.setModel(tabla);
+    }
+    
     
     public void setDisponibilidad(boolean flag){
         if(flag) {
@@ -270,11 +286,21 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         return txtDNI.getText();
     }
     
+    public String getDNIR() {
+        return TXTdniR.getText();
+    }
+    
     public void setInfoBusqueda(String mensaje) {
         labelInfoBusqueda.setText(mensaje);
     }
     public void lblTablaReserva(String mensaje){
         lblTablaReserva.setText("Reservas del Cliente: "+mensaje);
+    }
+    public void setMontoPat(String mensaje) {
+        lblMontoPat.setText("Monto Patentamiento: " + mensaje);
+    }
+    public void setMontoFlete(String mensaje) {
+        lblMontoFlete.setText("Monto Flete: " + mensaje);
     }
     public void limpiarInformacion() {
         cmbMarca.setSelectedIndex(0);
@@ -284,6 +310,9 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         cmbModelo.setVisible(false); 
         cmbVersion.setVisible(false); 
         cmbColor.setVisible(false);
+    }
+    
+    public void resetearRadioBotones(){
         rdAceptar.setSelected(false);
         rdRechazar.setSelected(false);
     }
@@ -294,7 +323,11 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         lblFechaEntrega.setText("Fecha de entrega:");
         lblMontoTotal.setText("Monto total:");
         lblFechaReserva.setText("Fecha de reserva:");
+        lblMontoPat.setText("Monto Patentamiento:");
+        lblMontoFlete.setText("Monto Flete:");
+        lblTablaReserva.setText("Reservas del Cliente:");
         txtDNI.setText("");
+        TXTdniR.setText("");
         labelInfoBusqueda.setText("");
         jLabel3.setText("");
     }
@@ -312,7 +345,8 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     }
     
     public int getID() {
-        return Integer.parseInt(txtReserva.getText());
+        return (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+        //return Integer.parseInt(txtReserva.getText());
     }
     
     public void setInfoReserva(String mensaje) {
@@ -347,16 +381,19 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         btnBuscar = new javax.swing.JButton();
         rdAceptar = new javax.swing.JRadioButton();
         rdRechazar = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtReserva = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
         lblReserva = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
         labelInfoBusqueda = new javax.swing.JLabel();
         lblTablaReserva = new javax.swing.JLabel();
+        lblMontoPat = new javax.swing.JLabel();
+        lblMontoFlete = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        TXTdniR = new javax.swing.JTextField();
+        btnBuscarR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -411,17 +448,11 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         buttonGroup1.add(rdRechazar);
         rdRechazar.setText("Rechazar");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Buscar reserva:");
-
         btnVerificar.setText("Verificar");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "FR", "FE", "Monto", "Estado", "Marca", "Modelo", "Version", "Color"
@@ -429,9 +460,18 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel4.setText("jLabel4");
-
         lblTablaReserva.setText("Reservas del Cliente: ");
+
+        lblMontoPat.setText("Monto Patentamiento:");
+
+        lblMontoFlete.setText("Monto Flete:");
+
+        jLabel4.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jLabel4.setText("Buscar reservas del cliente");
+
+        jLabel6.setText("DNI del cliente:");
+
+        btnBuscarR.setText("Buscar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -440,26 +480,19 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(cmbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblModelo)
-                        .addComponent(cmbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblColor)
-                        .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblReserva)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnVerificar))))
+                    .addComponent(jLabel1)
+                    .addComponent(cmbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblModelo)
+                    .addComponent(cmbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbVersion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblColor)
+                    .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblReserva)
                     .addComponent(lblVersion))
-                .addGap(50, 50, 50)
+                .addGap(56, 56, 56)
                 .addComponent(lblBusqueda)
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblFechaEntrega)
                     .addComponent(lblPrecio)
                     .addGroup(layout.createSequentialGroup()
@@ -467,106 +500,123 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rdAceptar)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdRechazar))
                     .addComponent(btnRegistrar)
                     .addComponent(lblMontoTotal)
                     .addComponent(jLabel9)
                     .addComponent(lblFechaReserva)
+                    .addComponent(lblMontoPat)
+                    .addComponent(labelInfoBusqueda)
+                    .addComponent(lblMontoFlete)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rdAceptar)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdRechazar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar))
-                    .addComponent(labelInfoBusqueda))
-                .addGap(18, 18, 18)
+                        .addComponent(btnBuscar)
+                        .addGap(11, 11, 11)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTablaReserva)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 777, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jLabel4)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lblTablaReserva)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 777, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TXTdniR, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscarR))
+                    .addComponent(btnVerificar))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblTablaReserva)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel5))
                         .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
-                                .addComponent(lblModelo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(lblVersion)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbVersion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
-                                .addComponent(lblColor)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDisponibilidad))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPrecio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblFechaEntrega)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblMontoTotal)
-                                .addGap(27, 27, 27)
-                                .addComponent(lblFechaReserva)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnBuscar))
-                                .addGap(18, 18, 18)
-                                .addComponent(labelInfoBusqueda))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblBusqueda)
-                                .addGap(43, 43, 43)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnVerificar)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(rdAceptar)
-                                    .addComponent(rdRechazar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRegistrar)))
-                        .addGap(93, 93, 93)
-                        .addComponent(lblReserva)))
-                .addContainerGap(252, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel4)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(cmbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(lblModelo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(lblVersion)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbVersion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(lblColor)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(31, 31, 31)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblDisponibilidad))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(lblPrecio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(lblFechaEntrega)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel9)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(lblMontoPat)
+                                            .addGap(7, 7, 7)
+                                            .addComponent(lblMontoFlete)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(lblMontoTotal)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(lblFechaReserva)
+                                            .addGap(25, 25, 25)
+                                            .addComponent(labelInfoBusqueda))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(3, 3, 3)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabel6)
+                                                .addComponent(TXTdniR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnBuscarR))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                    .addComponent(lblTablaReserva)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(23, 23, 23)))
+                            .addComponent(btnVerificar)
+                            .addGap(6, 6, 6))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(277, 277, 277)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblBusqueda)
+                                    .addGap(91, 91, 91))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel12)
+                                        .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnBuscar))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(rdAceptar)
+                                        .addComponent(rdRechazar))
+                                    .addGap(12, 12, 12))))))
+                .addComponent(btnRegistrar)
+                .addGap(71, 71, 71)
+                .addComponent(lblReserva)
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         pack();
@@ -613,7 +663,9 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TXTdniR;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarR;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnVerificar;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -624,10 +676,10 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     private javax.swing.JComboBox<String> cmbVersion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -638,6 +690,8 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     private javax.swing.JLabel lblFechaEntrega;
     private javax.swing.JLabel lblFechaReserva;
     private javax.swing.JLabel lblModelo;
+    private javax.swing.JLabel lblMontoFlete;
+    private javax.swing.JLabel lblMontoPat;
     private javax.swing.JLabel lblMontoTotal;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblReserva;
@@ -646,6 +700,5 @@ public class VistaPrincipal extends javax.swing.JFrame implements IPrincipal {
     private javax.swing.JRadioButton rdAceptar;
     private javax.swing.JRadioButton rdRechazar;
     private javax.swing.JTextField txtDNI;
-    private javax.swing.JTextField txtReserva;
     // End of variables declaration//GEN-END:variables
 }

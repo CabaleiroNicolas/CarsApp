@@ -12,6 +12,7 @@ public interface IPrincipal {
     public static String BUSCAR_CLIENTE = "Buscar el cliente por DNI";
     public static String REGISTRAR_RESERVA = "Registrar la reserva del vehiculo";
     public static String VERIFICAR_RESERVA = "Verificar la reserva del vehiculo";
+    public static String BUSCAR_RESERVA = "Buscar las reservas del cliente";
     public void ejecutar();
     public void cargarMarcas(List marcas);
     public void cargarModelos(List modelos);
@@ -27,7 +28,10 @@ public interface IPrincipal {
     public void setFechaEntrega(String fecha);
     public void setFechaReserva(String fecha);
     public void setTotal(Double precio);
+    public void setMontoPat(String mensaje);
+    public void setMontoFlete(String mensaje);
     public String getDNI();
+    public String getDNIR();
     public void setInfoBusqueda(String mensaje);
     public void limpiarInformacion();
     public boolean getSeleccion();
@@ -35,7 +39,9 @@ public interface IPrincipal {
     public void setInfoReserva(String mensaje);
     public void mostrarMensaje(String mensaje);
     public void limpiarLabelCliente();
+    public void limpiarTabla();
     public void llenarTabla(List<Reserva> reservas);
     public void lblTablaReserva(String mensaje);
+    public void resetearRadioBotones();
 
 }

@@ -70,21 +70,25 @@ public class Controlador implements ActionListener {
                 vista.setFechaReserva(formatoFecha.format(fechaReserva));
 
                 patentamiento.setCosto(auxVer.getPrecio());
+                
                 double total = auxVer.getPrecio() + auxVer.getSegmento().getFlete().getCosto() + patentamiento.getCosto();
+                vista.setMontoPat(Double.toString(patentamiento.getCosto()));
+                vista.setMontoFlete(Double.toString(auxVer.getSegmento().getFlete().getCosto()));
                 vista.setTotal(total);
                 montoTotal = total;
             }
-        } // Ejecución del evento al hacer click en el botón Buscar (Evento 5)
-        else if (event.getActionCommand().equals(vista.BUSCAR_CLIENTE)) {
+        } // Ejecución del evento al hacer click en el botón Buscar (Evento 5) y el boton Biscar de Reservas (Evento 8)
+        else if (event.getActionCommand().equals(vista.BUSCAR_CLIENTE) || event.getActionCommand().equals(vista.BUSCAR_RESERVA)) {
             List<Cliente> clientes = persistencia.getClientes();
-            String DNIbuscado = vista.getDNI();
+            String DNIbuscado = (vista.getDNI().equals("")) ? vista.getDNIR() : vista.getDNI();
             
             boolean encontrado = false;
 
             for (Cliente cl : clientes) {
                 if (cl.getDNI().equals(DNIbuscado)) {
-                    vista.setInfoBusqueda(cl.toString());
-                    
+                    if(event.getActionCommand().equals(vista.BUSCAR_CLIENTE)){
+                        vista.setInfoBusqueda(cl.toString());
+                    }
                     cliente = cl;
                     encontrado = true;
                 }
@@ -162,6 +166,8 @@ public class Controlador implements ActionListener {
                 vista.mostrarMensaje(reserva.toString());
                 llenarTablaReservas(cliente.getDNI(),cliente.getNombreCompleto());
                 vista.limpiarInformacion();
+                vista.limpiarTabla();
+                vista.resetearRadioBotones();
                 cliente = null;
                 fechaReserva = null;
             }
@@ -176,6 +182,7 @@ public class Controlador implements ActionListener {
                     res.setEstado(EstadosReserva.VERIFICADO);
                     vista.mostrarMensaje("La reserva de "+res.getCliente().getNombreCompleto()+" se verificó con éxito!");
                     vista.mostrarMensaje(res.toString());
+                    llenarTablaReservas(vista.getDNIR(),cliente.getNombreCompleto());
                     encontrado = true;
                 } else if(res.getID() == IDbuscado && res.getEstado() == EstadosReserva.NULO){
                     vista.mostrarMensaje("La reserva no fue aceptada (estado NULO)");

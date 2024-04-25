@@ -78,17 +78,15 @@ public class Controlador implements ActionListener {
                 montoTotal = total;
             }
         } // Ejecución del evento al hacer click en el botón Buscar (Evento 5) y el boton Biscar de Reservas (Evento 8)
-        else if (event.getActionCommand().equals(vista.BUSCAR_CLIENTE) || event.getActionCommand().equals(vista.BUSCAR_RESERVA)) {
+        else if (event.getActionCommand().equals(vista.BUSCAR_CLIENTE)) {
             List<Cliente> clientes = persistencia.getClientes();
-            String DNIbuscado = (vista.getDNI().equals("")) ? vista.getDNIR() : vista.getDNI();
+            String DNIbuscado = vista.getDNI();
             
             boolean encontrado = false;
 
             for (Cliente cl : clientes) {
-                if (cl.getDNI().equals(DNIbuscado)) {
-                    if(event.getActionCommand().equals(vista.BUSCAR_CLIENTE)){
-                        vista.setInfoBusqueda(cl.toString());
-                    }
+                if (cl.getDNI().equals(DNIbuscado)) {  
+                    vista.setInfoBusqueda(cl.toString());
                     cliente = cl;
                     encontrado = true;
                 }
@@ -166,34 +164,34 @@ public class Controlador implements ActionListener {
                 vista.mostrarMensaje(reserva.toString());
                 llenarTablaReservas(cliente.getDNI(),cliente.getNombreCompleto());
                 vista.limpiarInformacion();
-                vista.limpiarTabla();
+                //vista.limpiarTabla();
                 vista.resetearRadioBotones();
                 cliente = null;
                 fechaReserva = null;
             }
         } // Ejecución del evento al hacer click en el botón Verificar (Evento 7)
-        else if (event.getActionCommand().equals(vista.VERIFICAR_RESERVA)) {
-            List<Reserva> reservas = persistencia.getReservas();
-            int IDbuscado = vista.getID();
-            boolean encontrado = false;
-
-            for (Reserva res : reservas) {
-                if (res.getID() == IDbuscado && res.getEstado() == EstadosReserva.PENDIENTE) {
-                    res.setEstado(EstadosReserva.VERIFICADO);
-                    vista.mostrarMensaje("La reserva de "+res.getCliente().getNombreCompleto()+" se verificó con éxito!");
-                    vista.mostrarMensaje(res.toString());
-                    llenarTablaReservas(vista.getDNIR(),cliente.getNombreCompleto());
-                    encontrado = true;
-                } else if(res.getID() == IDbuscado && res.getEstado() == EstadosReserva.NULO){
-                    vista.mostrarMensaje("La reserva no fue aceptada (estado NULO)");
-                    encontrado = true;
-                }
-            }
-            
-            if (!encontrado) {
-                vista.mostrarMensaje("No se encontró la reserva");            
-            }
-        }
+//        else if (event.getActionCommand().equals(vista.VERIFICAR_RESERVA)) {
+//            List<Reserva> reservas = persistencia.getReservas();
+//            int IDbuscado = vista.getID();
+//            boolean encontrado = false;
+//
+//            for (Reserva res : reservas) {
+//                if (res.getID() == IDbuscado && res.getEstado() == EstadosReserva.PENDIENTE) {
+//                    res.setEstado(EstadosReserva.VERIFICADO);
+//                    vista.mostrarMensaje("La reserva de "+res.getCliente().getNombreCompleto()+" se verificó con éxito!");
+//                    vista.mostrarMensaje(res.toString());
+//                    llenarTablaReservas(vista.getDNIR(),cliente.getNombreCompleto());
+//                    encontrado = true;
+//                } else if(res.getID() == IDbuscado && res.getEstado() == EstadosReserva.NULO){
+//                    vista.mostrarMensaje("La reserva no fue aceptada (estado NULO)");
+//                    encontrado = true;
+//                }
+//            }
+//            
+//            if (!encontrado) {
+//                vista.mostrarMensaje("No se encontró la reserva");            
+//            }
+//        }
     }
 
     public List<String> defaultmarcas() {

@@ -166,19 +166,19 @@ public class Persistencia {
         
         clientes.add(new Cliente("44978725", "Leon Breslauer",
                 "Hola 123", "leon.breslauer@alu.frt.utn.edu.ar",
-                "3811234567", "3171234"));
+                "3811234567", "3171234", "123"));
         clientes.add(new Cliente("44123456", "Lionel Messi",
                 "Hola 456", "lionel.messi@alu.frt.utn.edu.ar",
-                "3814567891", "3179876"));
+                "3814567891", "3179876","123"));
         clientes.add(new Cliente("45124671", "Matias Alderete",
                 "Hola 123", "Gustavo.alderete@alu.frt.utn.edu.ar",
-                "3812345678", "123456"));
+                "3812345678", "123456","123"));
         clientes.add(new Cliente("44580815", "Nicolas Cabaleiro",
                 "Hola 456", "nicolas.cabaleiro@alu.frt.utn.edu.ar",
-                "3811214125", "1425152"));
+                "3811214125", "1425152","123"));
         clientes.add(new Cliente("41383873", "Ivan Ochoa",
                 "Hola 456", "ivan.ochoa@alu.frt.utn.edu.ar",
-                "3811214125", "1425152"));
+                "3811214125", "1425152","123"));
         
         
         

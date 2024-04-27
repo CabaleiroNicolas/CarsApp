@@ -81,11 +81,12 @@ public class Controlador implements ActionListener {
         else if (event.getActionCommand().equals(vista.BUSCAR_CLIENTE)) {
             List<Cliente> clientes = persistencia.getClientes();
             String DNIbuscado = vista.getDNI();
+            String constraseñaBuscada = vista.getContraseña();
             
             boolean encontrado = false;
 
             for (Cliente cl : clientes) {
-                if (cl.getDNI().equals(DNIbuscado)) {  
+                if (cl.getDNI().equals(DNIbuscado) && cl.getContraseña().equals(constraseñaBuscada)) {  
                     vista.setInfoBusqueda(cl.toString());
                     cliente = cl;
                     encontrado = true;

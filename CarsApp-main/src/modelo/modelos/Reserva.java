@@ -60,7 +60,7 @@ public class Reserva {
                 + "Cliente: " + cliente.toString() + "\n"
                 + "Fecha reserva: " + new SimpleDateFormat("dd/MM/yyyy").format(fechaReserva) + "\n"
                 + "Monto total: USD$ " + montoTotal + "\n"
-                + "Estado reserva: " + estado.toString()
+                + "Estado reserva: " + estado.toString()+ "\n"
                 + "Marca: " + marca.getNombre()+"\n"
                 + "Modelo: "+modelo.getNombre()+"\n"
                 + "Version:"+version.getNombre()+"\n"

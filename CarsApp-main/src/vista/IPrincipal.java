@@ -29,6 +29,7 @@ public interface IPrincipal {
     public void setMontoPat(String mensaje);
     public void setMontoFlete(String mensaje);
     public String getDNI();
+    public String getContraseña();
     public void setInfoBusqueda(String mensaje);
     public void limpiarInformacion();
     public boolean getSeleccion();

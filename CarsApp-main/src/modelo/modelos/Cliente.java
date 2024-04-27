@@ -7,19 +7,28 @@ public class Cliente {
     private String mail;
     private String celular;
     private String telefono;
+    private String contraseña;
     
-    public Cliente(String DNI, String nombreCompleto, String direccion,
-            String mail, String celular, String telefono) {
+    public Cliente(String DNI, String nombreCompleto, String direccion, String mail, String celular, String telefono, String contraseña) {
         this.DNI = DNI;
         this.nombreCompleto = nombreCompleto;
         this.direccion = direccion;
         this.mail = mail;
         this.celular = celular;
         this.telefono = telefono;
+        this.contraseña = contraseña;
     }
 
     public String getDNI() {
         return DNI;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public void setDNI(String DNI) {

@@ -16,6 +16,22 @@ import modelo.modelos.Flete;
 import modelo.modelos.Patentamiento;
 import modelo.modelos.Reserva;
 
+//Para Iniciar Sesion como clientes
+//
+//    Contraseña para todos los usuarios: 123
+//    DNIs:
+//
+//    Leon Breslauer: 44978725
+//
+//    Lionel Messi: 44123456
+//
+//    Matias Alderete: 45124671
+//
+//    Nicolas Cabaleiro: 44580815
+//
+//    Ivan Ochoa: 41383873
+//
+
 public class Persistencia {
 
     // FLETES
